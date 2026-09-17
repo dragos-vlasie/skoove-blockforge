@@ -1,0 +1,60 @@
+{
+  "id": "entry-e47488df-433c-4a69-bef8-4c7b4e1e9196",
+  "title": "New Article",
+  "slug": "new-article",
+  "status": "published",
+  "seo": {
+    "title": "New Article",
+    "description": "d",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Article"
+  },
+  "blocks": [
+    {
+      "id": "block-92f76e52-1a01-48f1-8bbf-c07edbe7a923",
+      "type": "TEXT",
+      "content": {
+        "title": "Section Heading",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "New Structured Content"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Start building with deterministic blocks."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-31T18:57:13.210Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-articles",
+  "excerpt": "",
+  "author": "",
+  "publishedAt": "2026-05-30T13:45:04.254Z",
+  "categoryIds": [],
+  "fields": {
+    "readingTime": "",
+    "featuredImage": ""
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "collection-articles",
+  "name": "Articles",
+  "singularName": "Article",
+  "routeParentId": null,
+  "slug": "articles",
+  "description": "Editorial content, blogs, guides, and resources.",
+  "preset": "article",
+  "schemaType": "Article",
+  "entryTemplateId": "article-standard",
+  "indexTemplateId": "blog-index",
+  "hasBlocks": true,
+  "publicIndex": false,
+  "seo": {
+    "title": "",
+    "description": "",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "CollectionPage"
+  },
+  "fields": [
+    {
+      "id": "body",
+      "label": "Article Body",
+      "type": "richText",
+      "required": false
+    },
+    {
+      "id": "readingTime",
+      "label": "Reading Time",
+      "type": "text",
+      "required": false
+    },
+    {
+      "id": "featuredImage",
+      "label": "Featured Image",
+      "type": "image",
+      "required": false
+    },
+    {
+      "id": "featuredImageAlt",
+      "label": "Featured Image Alt",
+      "type": "text",
+      "required": false
+    },
+    {
+      "id": "sourceUrl",
+      "label": "Original Source URL",
+      "type": "url",
+      "required": false
+    }
+  ],
+  "categoryIds": [
+    "category-guides",
+    "category-news"
+  ],
+  "updatedAt": "2026-05-29T00:00:00.000Z"
+}

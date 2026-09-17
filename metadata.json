@@ -1,0 +1,6 @@
+{
+  "name": "BlockForge CMS",
+  "description": "A headless, block-based JSON CMS engine and editor for React applications with deterministic rendering and AI-powered content generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

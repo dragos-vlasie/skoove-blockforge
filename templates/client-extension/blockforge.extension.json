@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "travel-client",
+  "name": "Travel client components",
+  "version": "1.0.0",
+  "repository": "owner/client-website",
+  "blocks": [
+    {
+      "type": "CUSTOM:TOUR_COMPARISON",
+      "label": "Tour comparison",
+      "shortLabel": "TC",
+      "description": "Compare two tours using controlled client-editable fields.",
+      "category": "Travel client",
+      "viewModule": "src/client-extensions/TourComparison",
+      "defaultContent": {
+        "eyebrow": "Compare tours",
+        "title": "Choose your next journey",
+        "leftTour": "Coastal Discovery",
+        "rightTour": "Mountain Escape",
+        "buttonLabel": "View tours"
+      },
+      "fields": [
+        { "id": "eyebrow", "label": "Eyebrow", "type": "text" },
+        { "id": "title", "label": "Title", "type": "text" },
+        { "id": "leftTour", "label": "Left tour", "type": "text" },
+        { "id": "rightTour", "label": "Right tour", "type": "text" },
+        { "id": "buttonLabel", "label": "Button label", "type": "text" }
+      ]
+    }
+  ]
+}

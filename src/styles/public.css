@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../../app";
+@source "../../apps";
+@source "../../components";
+@source "../../packages";
+@source "..";
+
+:root {
+  color-scheme: light;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #dbe3ee;
+  --paper: #ffffff;
+  --soft: #f6f8fb;
+  --accent: #2563eb;
+  --accent-strong: #0f3f9f;
+  --radius: 28px;
+  --site-primary: var(--accent);
+  --site-accent: var(--accent-strong);
+  --site-background: var(--paper);
+  --site-surface: color-mix(in srgb, var(--paper) 96%, var(--ink) 4%);
+  --site-surface-soft: var(--soft);
+  --site-surface-strong: color-mix(in srgb, var(--paper) 78%, var(--ink) 22%);
+  --site-text: var(--ink);
+  --site-heading: var(--ink);
+  --site-muted: var(--muted);
+  --site-border: var(--line);
+  --site-primary-strong: color-mix(in srgb, var(--site-primary) 82%, var(--site-text) 18%);
+  --site-on-primary: #ffffff;
+  --site-on-accent: #ffffff;
+  --site-inverse: var(--ink);
+  --site-on-inverse: var(--paper);
+  --site-radius: var(--radius);
+  --site-radius-sm: 12px;
+  --site-radius-lg: 30px;
+  --site-container-width: 80rem;
+  --site-gutter: clamp(1.25rem, 4vw, 3rem);
+  --site-section-space: clamp(4rem, 8vw, 7rem);
+  --site-section-space-compact: clamp(2.5rem, 5vw, 4rem);
+  --site-display-size: clamp(3rem, 7vw, 6rem);
+  --site-heading-size: clamp(2.35rem, 6vw, 4.5rem);
+  --site-heading-weight: 800;
+  --site-heading-tracking: -0.04em;
+  --site-heading-leading: 0.98;
+  --site-card-radius: var(--site-radius);
+  --site-media-radius: var(--site-radius);
+  --site-button-radius: var(--site-radius-sm);
+  --site-card-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--site-text) 10%, transparent);
+  --site-media-shadow: none;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--site-background);
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--site-background);
+    color: var(--site-text);
+    font-family: var(--font-body, ui-sans-serif, system-ui, sans-serif);
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  a:not([class]) {
+    color: inherit;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.16em;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "category-news",
+  "name": "News",
+  "slug": "news",
+  "description": "Updates and announcements.",
+  "publicIndex": false,
+  "collectionIds": [
+    "collection-articles"
+  ],
+  "seo": {
+    "title": "News",
+    "description": "BlockForge announcements and product updates.",
+    "ogImage": "https://picsum.photos/1200/630?news",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "CollectionPage"
+  },
+  "updatedAt": "2026-05-29T00:00:00.000Z"
+}

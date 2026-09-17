@@ -1,0 +1,138 @@
+import { BlockType } from "../../../types";
+import type { PackPatternDefinition } from "../types";
+
+export const corePatterns = [
+  {
+    id: "core.home",
+    name: "Homepage",
+    description: "The primary entry page for the website.",
+    category: "home",
+    subject: "page",
+    minimumConfidence: 0.55,
+    signals: [
+      { type: "route", values: ["/"], match: "exact", weight: 0.65, label: "Uses the root URL" },
+      { type: "title", values: ["home", "homepage"], match: "exact", weight: 0.15, label: "Named as the homepage" },
+      { type: "block", values: [BlockType.HERO], weight: 0.2, label: "Contains a hero section" },
+    ],
+  },
+  {
+    id: "core.contact",
+    name: "Contact page",
+    description: "A page designed to receive enquiries or provide contact information.",
+    category: "contact",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "route", values: ["contact", "lien-he", "enquiry"], match: "contains", weight: 0.3, label: "Contact-oriented URL" },
+      { type: "title", values: ["contact", "get in touch", "lien he", "enquiry"], match: "contains", weight: 0.25, label: "Contact-oriented title" },
+      { type: "block", values: [BlockType.CONTACT_FORM], weight: 0.45, label: "Contains a contact form" },
+    ],
+  },
+  {
+    id: "core.about",
+    name: "About page",
+    description: "A page explaining the organisation, its approach, and its credibility.",
+    category: "editorial",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "route", values: ["about", "company", "story", "ve-chung-toi"], match: "contains", weight: 0.45, label: "About-oriented URL" },
+      { type: "title", values: ["about", "our story", "company", "ve chung toi"], match: "contains", weight: 0.35, label: "About-oriented title" },
+      { type: "block", values: [BlockType.IMAGE_TEXT, BlockType.STATS, BlockType.TESTIMONIALS], match: "any", weight: 0.2, label: "Contains organisational proof" },
+    ],
+  },
+  {
+    id: "core.services",
+    name: "Services page",
+    description: "A page presenting services, packages, capabilities, or offers.",
+    category: "listing",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "route", values: ["services", "solutions", "what-we-do", "offers"], match: "contains", weight: 0.4, label: "Service-oriented URL" },
+      { type: "title", values: ["services", "solutions", "what we do", "offers"], match: "contains", weight: 0.3, label: "Service-oriented title" },
+      { type: "block", values: [BlockType.UI_CARD_GRID, BlockType.PRICING, BlockType.FEATURES], match: "any", weight: 0.3, label: "Contains service presentation components" },
+    ],
+  },
+  {
+    id: "core.portfolio",
+    name: "Work or portfolio page",
+    description: "A visual page presenting selected work, places, products, or outcomes.",
+    category: "listing",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "route", values: ["work", "portfolio", "projects", "gallery", "case-studies"], match: "contains", weight: 0.4, label: "Portfolio-oriented URL" },
+      { type: "title", values: ["work", "portfolio", "projects", "gallery", "case studies"], match: "contains", weight: 0.25, label: "Portfolio-oriented title" },
+      { type: "block", values: [BlockType.IMAGE_GALLERY, BlockType.TESTIMONIALS, BlockType.UI_CARD_GRID], match: "any", weight: 0.35, label: "Contains visual proof components" },
+    ],
+  },
+  {
+    id: "core.legal",
+    name: "Legal page",
+    description: "Privacy, terms, cookie, or other policy content.",
+    category: "legal",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      {
+        type: "route",
+        values: ["privacy", "terms", "cookies", "legal", "bao-mat", "dieu-khoan"],
+        match: "contains",
+        weight: 0.5,
+        label: "Policy-oriented URL",
+      },
+      {
+        type: "title",
+        values: ["privacy", "terms", "cookies", "legal", "bao mat", "dieu khoan"],
+        match: "contains",
+        weight: 0.5,
+        label: "Policy-oriented title",
+      },
+    ],
+  },
+  {
+    id: "core.article-detail",
+    name: "Article detail",
+    description: "An editorial entry inside an article or blog collection.",
+    category: "editorial",
+    subject: "entry",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "collection-preset", values: ["article"], weight: 0.45, label: "Uses the article content model" },
+      { type: "schema", values: ["Article"], weight: 0.35, label: "Uses Article structured data" },
+      { type: "template", values: ["article-standard"], weight: 0.2, label: "Uses the article template" },
+    ],
+  },
+  {
+    id: "core.content-listing",
+    name: "Content listing",
+    description: "A page that introduces or lists repeatable content.",
+    category: "listing",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "block", values: [BlockType.BLOG_GRID], weight: 0.65, label: "Contains a content grid" },
+      { type: "title", values: ["blog", "articles", "news", "guides"], match: "contains", weight: 0.2, label: "Listing-oriented title" },
+      { type: "route", values: ["blog", "articles", "news", "guides"], match: "contains", weight: 0.15, label: "Listing-oriented URL" },
+    ],
+  },
+  {
+    id: "core.landing",
+    name: "Landing page",
+    description: "A flexible one-off page composed from marketing and content sections.",
+    category: "landing",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      {
+        type: "block",
+        values: [BlockType.HERO, BlockType.CTA, BlockType.FEATURES, BlockType.IMAGE_TEXT],
+        match: "any",
+        weight: 0.55,
+        label: "Uses landing-page sections",
+      },
+      { type: "template", values: ["landing-page"], weight: 0.45, label: "Uses the landing-page template" },
+    ],
+  },
+] as const satisfies readonly PackPatternDefinition[];

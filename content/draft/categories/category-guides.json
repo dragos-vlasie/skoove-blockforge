@@ -1,0 +1,19 @@
+{
+  "id": "category-guides",
+  "name": "Guides",
+  "slug": "guides",
+  "description": "Deep dives and implementation guides.",
+  "publicIndex": true,
+  "collectionIds": [
+    "collection-articles"
+  ],
+  "seo": {
+    "title": "Guides",
+    "description": "BlockForge guides for building fast, structured Next.js websites with static publishing, SEO automation, schema, and content validation.",
+    "ogImage": "https://picsum.photos/1200/630?guides",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "CollectionPage"
+  },
+  "updatedAt": "2026-05-29T00:00:00.000Z"
+}

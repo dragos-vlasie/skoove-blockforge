@@ -1,0 +1,126 @@
+import { BlockType } from "../../../types";
+import type { PackPatternDefinition } from "../types";
+
+export const travelAgencyPatterns = [
+  {
+    id: "travel-agency.home",
+    name: "Travel agency homepage",
+    description: "A travel-focused homepage combining discovery, featured journeys, trust, and enquiry.",
+    category: "home",
+    subject: "page",
+    minimumConfidence: 0.55,
+    signals: [
+      { type: "route", values: ["/"], match: "exact", weight: 0.2, label: "Uses the root URL" },
+      {
+        type: "block",
+        values: [BlockType.TRAVEL_EDITORIAL_HERO, BlockType.TRAVEL_FEATURED_OFFER, BlockType.TRAVEL_JOURNEY_GRID],
+        match: "any",
+        weight: 0.5,
+        label: "Uses travel discovery sections",
+      },
+      {
+        type: "block",
+        values: [BlockType.TRAVEL_TRUST_STRIP, BlockType.TRAVEL_CONTACT_CTA],
+        match: "any",
+        weight: 0.2,
+        label: "Includes trust or enquiry content",
+      },
+      { type: "title", values: ["home", "travel", "tour"], match: "contains", weight: 0.1, label: "Travel-oriented title" },
+    ],
+  },
+  {
+    id: "travel-agency.tour-catalogue",
+    name: "Tour catalogue",
+    description: "A page that presents and routes visitors into a collection of tours.",
+    category: "listing",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      { type: "block", values: [BlockType.TRAVEL_TOUR_CATALOGUE], weight: 0.6, label: "Contains the tour catalogue" },
+      {
+        type: "block",
+        values: [BlockType.TRAVEL_JOURNEY_GRID, BlockType.TRAVEL_FEATURED_OFFER],
+        match: "any",
+        weight: 0.15,
+        label: "Contains tour discovery sections",
+      },
+      { type: "route", values: ["tour", "tours", "journey", "trips"], match: "contains", weight: 0.15, label: "Tour-oriented URL" },
+      { type: "title", values: ["tour", "tours", "journey", "trips"], match: "contains", weight: 0.1, label: "Tour-oriented title" },
+    ],
+  },
+  {
+    id: "travel-agency.tour-detail",
+    name: "Tour detail",
+    description: "A repeatable tour entry with itinerary, departure, package, and enquiry information.",
+    category: "detail",
+    subject: "entry",
+    minimumConfidence: 0.45,
+    signals: [
+      {
+        type: "block",
+        values: [
+          BlockType.TRAVEL_TOUR_OVERVIEW,
+          BlockType.TRAVEL_DEPARTURE_SCHEDULE,
+          BlockType.TRAVEL_TOUR_PACKAGE,
+          BlockType.TRAVEL_TOUR_ENQUIRY,
+        ],
+        match: "any",
+        weight: 0.55,
+        label: "Contains tour-detail sections",
+      },
+      {
+        type: "collection-name",
+        values: ["tour", "trip", "journey", "travel"],
+        match: "contains",
+        weight: 0.15,
+        label: "Belongs to a tour collection",
+      },
+      {
+        type: "collection-slug",
+        values: ["tour", "tours", "trip", "trips", "journey"],
+        match: "contains",
+        weight: 0.1,
+        label: "Uses a tour collection route",
+      },
+      { type: "schema", values: ["Product"], weight: 0.1, label: "Uses Product structured data" },
+      {
+        type: "field",
+        values: ["duration", "price", "departures", "itinerary", "transport"],
+        match: "any",
+        weight: 0.1,
+        label: "Contains structured tour fields",
+      },
+    ],
+  },
+  {
+    id: "travel-agency.enquiry",
+    name: "Travel enquiry page",
+    description: "A dedicated page for consultation or trip-planning enquiries.",
+    category: "contact",
+    subject: "page",
+    minimumConfidence: 0.45,
+    signals: [
+      {
+        type: "block",
+        values: [BlockType.TRAVEL_TOUR_ENQUIRY, BlockType.TRAVEL_CONTACT_CTA],
+        match: "any",
+        weight: 0.6,
+        label: "Contains a travel enquiry section",
+      },
+      {
+        type: "route",
+        values: ["contact", "enquiry", "consultation", "lien-he"],
+        match: "contains",
+        weight: 0.2,
+        label: "Enquiry-oriented URL",
+      },
+      {
+        type: "title",
+        values: ["contact", "enquiry", "consultation", "plan", "lien he"],
+        match: "contains",
+        weight: 0.2,
+        label: "Enquiry-oriented title",
+      },
+    ],
+  },
+] as const satisfies readonly PackPatternDefinition[];

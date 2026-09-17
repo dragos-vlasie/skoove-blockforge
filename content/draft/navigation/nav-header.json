@@ -1,0 +1,31 @@
+{
+  "id": "nav-header",
+  "name": "Header",
+  "location": "header",
+  "items": [
+    {
+      "id": "nav-home",
+      "label": "Home",
+      "targetType": "page",
+      "targetId": "page-home"
+    },
+    {
+      "id": "nav-about",
+      "label": "About",
+      "targetType": "page",
+      "targetId": "page-about"
+    },
+    {
+      "id": "nav-guides",
+      "label": "Guides",
+      "targetType": "category",
+      "targetId": "category-guides"
+    },
+    {
+      "id": "nav-item-c30031b6-d089-44fe-8e6a-0425de8e081d",
+      "label": "New Link",
+      "targetType": "entry",
+      "targetId": "entry-static-first-cms"
+    }
+  ]
+}

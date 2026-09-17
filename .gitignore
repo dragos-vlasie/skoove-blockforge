@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.next
+*.tsbuildinfo
+dist
+dist-ssr
+.netlify/
+playwright-report/
+test-results/
+*.local
+
+# Local Codex agent and skill installations
+.agents/
+skills-lock.json
+
+# Generated migration audits, source snapshots, and conversion reports
+migration-data/
+
+# Local first-party analytics event snapshots
+content/analytics/
+
+# Local service state and generated review artifacts
+supabase/.temp/
+Claude outputs/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

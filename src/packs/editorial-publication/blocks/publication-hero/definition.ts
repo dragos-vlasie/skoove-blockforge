@@ -1,0 +1,103 @@
+import { z } from "zod";
+import { BlockType } from "../../../../../types";
+import type { BlockDefinition } from "../../../../blocks/types";
+
+const routeSchema = z.object({
+  label: z.string(),
+  code: z.string(),
+  href: z.string(),
+});
+
+const publicationHeroBlock = {
+  type: BlockType.PUBLICATION_HERO,
+  packId: "editorial-publication",
+  label: "Creator Travel Hero",
+  shortLabel: "PH",
+  category: "Editorial Publication",
+  order: 5,
+  defaultContent: {
+    eyebrow: "Independent stories",
+    title: "A publication shaped by experience, curiosity, and useful detail.",
+    body: "Introduce the publication, its point of view, and what readers can expect.",
+    primaryLabel: "Explore stories",
+    primaryHref: "/",
+    secondaryLabel: "About the author",
+    secondaryHref: "/about/",
+    portraitImage: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=82&w=1400",
+    portraitAlt: "Traveller overlooking a mountain landscape",
+    portraitCaption: "Meet the author",
+    journeyImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=82&w=1000",
+    journeyAlt: "Road leading through a dramatic landscape",
+    journeyCaption: "Latest field notes",
+    stampText: "Field tested",
+    presentation: "hero",
+    routesHeading: "Where are you flying next?",
+    routesAriaLabel: "Homepage categories",
+    routes: [
+      { label: "Latest stories", code: "READ", href: "/" },
+      { label: "Field guides", code: "EXPLORE", href: "/" },
+      { label: "About", code: "CONNECT", href: "/about/" },
+    ],
+  },
+  schema: z.object({
+    eyebrow: z.string(),
+    title: z.string(),
+    body: z.string(),
+    primaryLabel: z.string(),
+    primaryHref: z.string(),
+    secondaryLabel: z.string(),
+    secondaryHref: z.string(),
+    portraitImage: z.string(),
+    portraitAlt: z.string().optional(),
+    portraitCaption: z.string().optional(),
+    journeyImage: z.string(),
+    journeyAlt: z.string().optional(),
+    journeyCaption: z.string().optional(),
+    stampText: z.string().optional(),
+    presentation: z.enum(["hero", "about"]).optional(),
+    routesHeading: z.string().optional(),
+    routesAriaLabel: z.string().optional(),
+    routes: z.array(routeSchema),
+  }).passthrough(),
+  fields: [
+    { id: "eyebrow", label: "Introduction", type: "text" },
+    { id: "title", label: "Headline", type: "textarea", rows: 3 },
+    { id: "body", label: "Promise", type: "textarea", rows: 3 },
+    { id: "primaryLabel", label: "Primary button", type: "text" },
+    { id: "primaryHref", label: "Primary link", type: "url" },
+    { id: "secondaryLabel", label: "Secondary button", type: "text" },
+    { id: "secondaryHref", label: "Secondary link", type: "url" },
+    { id: "portraitImage", label: "Author image", type: "image" },
+    { id: "portraitAlt", label: "Author image alt text", type: "text" },
+    { id: "portraitCaption", label: "Author image caption", type: "text" },
+    { id: "journeyImage", label: "Journey image", type: "image" },
+    { id: "journeyAlt", label: "Journey image alt text", type: "text" },
+    { id: "journeyCaption", label: "Journey image caption", type: "text" },
+    { id: "stampText", label: "Image stamp", type: "text" },
+    {
+      id: "presentation",
+      label: "Presentation",
+      type: "select",
+      options: [
+        { label: "Opening hero", value: "hero" },
+        { label: "About band", value: "about" },
+      ],
+    },
+    { id: "routesHeading", label: "Navigation heading", type: "text" },
+    {
+      id: "routes",
+      label: "Ways to explore",
+      type: "repeater",
+      addLabel: "Add route",
+      defaultItem: { label: "Latest stories", code: "READ", href: "/" },
+      fields: [
+        { id: "label", label: "Label", type: "text" },
+        { id: "code", label: "Short code", type: "text" },
+        { id: "href", label: "Link", type: "url" },
+      ],
+    },
+  ],
+  compositionRole: "section",
+} satisfies BlockDefinition;
+
+export default publicationHeroBlock;

@@ -1,0 +1,56 @@
+{
+  "id": "page-2540ac2c-d762-4eba-b06b-659d01e00073",
+  "title": "Test",
+  "slug": "test",
+  "status": "draft",
+  "seo": {
+    "title": "Test",
+    "description": "Test",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "WebPage"
+  },
+  "blocks": [
+    {
+      "id": "block-f270374c-5550-4500-b2f0-9eb2ff17c948",
+      "type": "TEXT",
+      "content": {
+        "title": "Section Heading",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "New Structured Content"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Start building with deterministic blocks."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-31T18:37:34.268Z",
+  "kind": "page",
+  "name": "Test",
+  "parentId": null,
+  "order": 99,
+  "showInNavigation": false,
+  "navigationLabel": "Test"
+}

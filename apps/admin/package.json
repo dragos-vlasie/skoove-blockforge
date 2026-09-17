@@ -1,0 +1,22 @@
+{
+  "name": "@blockforge/admin",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "predev": "node ../../scripts/generate-next-block-registry.mjs && node ../../scripts/generate-client-extension-registry.mjs",
+    "dev": "next dev --port 3001",
+    "prebuild": "node ../../scripts/generate-next-block-registry.mjs && node ../../scripts/generate-client-extension-registry.mjs",
+    "build": "next build --webpack",
+    "start": "next start --port 3001",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@blockforge/blocks": "*",
+    "@blockforge/core": "*",
+    "@blockforge/packs": "*",
+    "@blockforge/themes": "*",
+    "next": "^16.2.9",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

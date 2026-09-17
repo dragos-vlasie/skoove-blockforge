@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "skoove-client",
+  "name": "Skoove client components",
+  "version": "1.0.0",
+  "repository": "dragos-vlasie/skoove-blockforge",
+  "blocks": [
+    {
+      "type": "CUSTOM:SKOOVE_LEARNING_PATH_HERO",
+      "label": "Skoove learning path hero",
+      "shortLabel": "SK",
+      "description": "A branded piano-learning hero with controlled messaging and calls to action.",
+      "category": "Skoove",
+      "viewModule": "src/client-extensions/SkooveLearningPathHero",
+      "defaultContent": {
+        "eyebrow": "Learn piano your way",
+        "title": "A learning path that moves at your pace",
+        "description": "Build confidence with interactive lessons, real-time feedback, and songs you actually want to play.",
+        "primaryCtaLabel": "Start learning",
+        "primaryCtaHref": "/start/",
+        "secondaryCtaLabel": "Explore lessons",
+        "secondaryCtaHref": "/lessons/",
+        "trustLine": "Trusted by piano learners around the world"
+      },
+      "fields": [
+        { "id": "eyebrow", "label": "Eyebrow", "type": "text" },
+        { "id": "title", "label": "Title", "type": "textarea", "required": true },
+        { "id": "description", "label": "Description", "type": "textarea", "required": true },
+        { "id": "primaryCtaLabel", "label": "Primary button label", "type": "text", "required": true },
+        { "id": "primaryCtaHref", "label": "Primary button URL", "type": "url", "required": true },
+        { "id": "secondaryCtaLabel", "label": "Secondary button label", "type": "text" },
+        { "id": "secondaryCtaHref", "label": "Secondary button URL", "type": "url" },
+        { "id": "trustLine", "label": "Trust line", "type": "text" }
+      ]
+    }
+  ]
+}

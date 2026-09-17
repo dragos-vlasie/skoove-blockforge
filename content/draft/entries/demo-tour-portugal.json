@@ -1,0 +1,70 @@
+{
+  "id": "demo-tour-portugal",
+  "title": "Portugal: Lisbon to the Douro",
+  "slug": "portugal-lisbon-douro",
+  "status": "published",
+  "seo": {
+    "title": "Portugal: Lisbon to the Douro",
+    "description": "Discover Lisbon, Porto, Atlantic villages, and the vineyard terraces of the Douro Valley.",
+    "ogImage": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&q=82&w=1600",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Product"
+  },
+  "blocks": [
+    {
+      "id": "demo-tour-portugal-overview",
+      "type": "VIET_TOUR_OVERVIEW",
+      "content": {
+        "eyebrow": "Food & culture",
+        "title": "Portugal: Lisbon to the Douro",
+        "summary": "Follow the coast and river north through tiled cities, fishing villages, family kitchens, and vineyard country.",
+        "image": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&q=82&w=1600",
+        "imageAlt": "Historic Porto beside the Douro River",
+        "priceLabel": "From",
+        "price": "$1,640",
+        "facts": [
+          { "label": "Duration", "value": "7 days / 6 nights" },
+          { "label": "Transport", "value": "Rail & private transfer" },
+          { "label": "Departure", "value": "Lisbon" },
+          { "label": "Travel style", "value": "Slow travel" }
+        ],
+        "primaryLabel": "Plan this trip",
+        "primaryHref": "#travel-enquiry",
+        "backLabel": "All tours",
+        "backHref": "/tours/"
+      }
+    },
+    {
+      "id": "demo-tour-portugal-departures",
+      "type": "VIET_DEPARTURE_SCHEDULE",
+      "content": {
+        "eyebrow": "Choose your date",
+        "title": "Upcoming departures",
+        "introduction": "Indicative dates and prices for the next season.",
+        "departures": [
+          { "id": "pt-1", "date": "2026-09-05", "duration": "7 days / 6 nights", "price": "$1,640", "status": "Available", "note": "Wine harvest season" },
+          { "id": "pt-2", "date": "2027-05-15", "duration": "7 days / 6 nights", "price": "$1,740", "status": "Available", "note": "Spring departure" }
+        ]
+      }
+    }
+  ],
+  "updatedAt": "2026-08-03T20:00:00.000Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-tours",
+  "excerpt": "Lisbon, Porto, Atlantic villages, and the vineyard terraces of the Douro Valley.",
+  "author": "Travel Agency",
+  "publishedAt": "2026-08-03T20:00:00.000Z",
+  "categoryIds": [],
+  "fields": {
+    "summary": "Lisbon, Porto, Atlantic villages, and the vineyard terraces of the Douro Valley.",
+    "heroImage": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&q=82&w=1600",
+    "heroImageAlt": "Historic Porto beside the Douro River",
+    "priceCurrency": "USD",
+    "durationRange": "7 days / 6 nights",
+    "transportSummary": "Rail & private transfer",
+    "badge": "Food & wine",
+    "featured": false,
+    "sourceOrder": 3
+  }
+}

@@ -1,0 +1,12 @@
+import { z } from "zod";
+import { BlockType } from "../../../../../types";
+import { optionalString, type BlockDefinition } from "../../../../blocks/types";
+
+const itemSchema = z.object({ title: z.string(), eyebrow: optionalString, description: optionalString, image: optionalString, imageAlt: optionalString, href: optionalString }).passthrough();
+export const vietJourneyGridBlock = {
+  type: BlockType.TRAVEL_JOURNEY_GRID, label: "Journey Grid", shortLabel: "JG", category: "Travel Agency", order: 103,
+  defaultContent: { title: "How would you like to travel?", emptyMessage: "No journey categories have been added yet.", items: [{ title: "Heritage and history", eyebrow: "Culture", description: "Places shaped by remarkable stories and traditions.", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=82&w=1200", imageAlt: "Historic temple surrounded by autumn trees", href: "/tours/" }, { title: "Nature and scenery", eyebrow: "Landscape", description: "Mountains, lakes, coastlines, and memorable routes.", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=82&w=1200", imageAlt: "Mountain range reflected in a lake", href: "/tours/" }, { title: "Food and city life", eyebrow: "Local life", description: "Vibrant cities paired with authentic local flavours.", image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&q=82&w=1200", imageAlt: "Historic city beside a river", href: "/tours/" }] },
+  schema: z.object({ title: optionalString, emptyMessage: optionalString, items: z.array(itemSchema).optional() }).passthrough(),
+  fields: [{ id: "title", label: "Title", type: "text" }, { id: "emptyMessage", label: "Empty Message", type: "textarea", rows: 2 }, { id: "items", label: "Journey Categories", type: "repeater", addLabel: "Add Category", defaultItem: { title: "Journey category", eyebrow: "Category", description: "Describe this journey.", image: "", imageAlt: "", href: "/tours/" }, fields: [{ id: "title", label: "Title", type: "text" }, { id: "eyebrow", label: "Eyebrow", type: "text" }, { id: "description", label: "Description", type: "textarea", rows: 3 }, { id: "image", label: "Image", type: "image" }, { id: "imageAlt", label: "Image Alt", type: "text" }, { id: "href", label: "Link", type: "url" }] }],
+} satisfies BlockDefinition;
+export default vietJourneyGridBlock;

@@ -1,0 +1,83 @@
+{
+  "id": "demo-tour-japan",
+  "title": "Japan: Tokyo, Kyoto & the Alps",
+  "slug": "japan-tokyo-kyoto-alps",
+  "status": "published",
+  "seo": {
+    "title": "Japan: Tokyo, Kyoto & the Alps",
+    "description": "A ten-day journey through modern Tokyo, historic Kyoto, and the mountain towns of the Japanese Alps.",
+    "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=82&w=1600",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Product"
+  },
+  "blocks": [
+    {
+      "id": "demo-tour-japan-overview",
+      "type": "VIET_TOUR_OVERVIEW",
+      "content": {
+        "eyebrow": "Culture & landscapes",
+        "title": "Japan: Tokyo, Kyoto & the Alps",
+        "summary": "Move from Tokyo's electric neighbourhoods to Kyoto's quiet temples, with alpine villages and mountain scenery in between.",
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=82&w=1600",
+        "imageAlt": "Traditional Japanese pagoda framed by autumn trees",
+        "priceLabel": "From",
+        "price": "$2,490",
+        "facts": [
+          { "label": "Duration", "value": "10 days / 9 nights" },
+          { "label": "Transport", "value": "Rail & private transfer" },
+          { "label": "Departure", "value": "Tokyo" },
+          { "label": "Travel style", "value": "Small group" }
+        ],
+        "primaryLabel": "Plan this trip",
+        "primaryHref": "#travel-enquiry",
+        "backLabel": "All tours",
+        "backHref": "/tours/"
+      }
+    },
+    {
+      "id": "demo-tour-japan-story",
+      "type": "VIET_TOUR_STORY",
+      "content": {
+        "eyebrow": "Journey highlight",
+        "title": "Old Japan between the mountain passes",
+        "body": "Walk preserved post towns, stay in a traditional inn, and slow down between the country's celebrated cities.",
+        "image": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=82&w=1600",
+        "imageAlt": "Lantern-lit traditional street in Japan",
+        "caption": "Evening in historic Japan",
+        "imageSide": "right"
+      }
+    },
+    {
+      "id": "demo-tour-japan-departures",
+      "type": "VIET_DEPARTURE_SCHEDULE",
+      "content": {
+        "eyebrow": "Choose your date",
+        "title": "Upcoming departures",
+        "introduction": "Indicative dates and prices for the next season.",
+        "departures": [
+          { "id": "jp-1", "date": "2026-09-18", "duration": "10 days / 9 nights", "price": "$2,490", "status": "Available", "note": "4 places left" },
+          { "id": "jp-2", "date": "2026-11-06", "duration": "10 days / 9 nights", "price": "$2,690", "status": "Available", "note": "Autumn departure" }
+        ]
+      }
+    }
+  ],
+  "updatedAt": "2026-08-03T20:00:00.000Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-tours",
+  "excerpt": "Tokyo, Kyoto, alpine villages, and the classic rail journey between them.",
+  "author": "Travel Agency",
+  "publishedAt": "2026-08-03T20:00:00.000Z",
+  "categoryIds": [],
+  "fields": {
+    "summary": "Tokyo, Kyoto, alpine villages, and the classic rail journey between them.",
+    "heroImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=82&w=1600",
+    "heroImageAlt": "Traditional Japanese pagoda framed by autumn trees",
+    "priceCurrency": "USD",
+    "durationRange": "10 days / 9 nights",
+    "transportSummary": "Rail & private transfer",
+    "badge": "Small group",
+    "featured": true,
+    "sourceOrder": 1
+  }
+}

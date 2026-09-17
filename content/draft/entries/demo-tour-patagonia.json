@@ -1,0 +1,70 @@
+{
+  "id": "demo-tour-patagonia",
+  "title": "Patagonia: Peaks, Glaciers & Lakes",
+  "slug": "patagonia-peaks-glaciers-lakes",
+  "status": "published",
+  "seo": {
+    "title": "Patagonia: Peaks, Glaciers & Lakes",
+    "description": "An active journey through Patagonia's granite peaks, blue glaciers, and open steppe landscapes.",
+    "ogImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=82&w=1600",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Product"
+  },
+  "blocks": [
+    {
+      "id": "demo-tour-patagonia-overview",
+      "type": "VIET_TOUR_OVERVIEW",
+      "content": {
+        "eyebrow": "Active adventure",
+        "title": "Patagonia: Peaks, Glaciers & Lakes",
+        "summary": "Hike beneath granite towers, cross wind-shaped steppe, and watch ancient ice move through turquoise water.",
+        "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=82&w=1600",
+        "imageAlt": "Snowy mountain range reflected in a clear lake",
+        "priceLabel": "From",
+        "price": "$3,290",
+        "facts": [
+          { "label": "Duration", "value": "12 days / 11 nights" },
+          { "label": "Transport", "value": "Coach, boat & hiking" },
+          { "label": "Departure", "value": "Buenos Aires" },
+          { "label": "Travel style", "value": "Active" }
+        ],
+        "primaryLabel": "Plan this trip",
+        "primaryHref": "#travel-enquiry",
+        "backLabel": "All tours",
+        "backHref": "/tours/"
+      }
+    },
+    {
+      "id": "demo-tour-patagonia-departures",
+      "type": "VIET_DEPARTURE_SCHEDULE",
+      "content": {
+        "eyebrow": "Choose your date",
+        "title": "Upcoming departures",
+        "introduction": "Indicative dates and prices for the next season.",
+        "departures": [
+          { "id": "ar-1", "date": "2026-11-14", "duration": "12 days / 11 nights", "price": "$3,290", "status": "Available", "note": "6 places left" },
+          { "id": "ar-2", "date": "2027-02-06", "duration": "12 days / 11 nights", "price": "$3,490", "status": "Available", "note": "Peak summer" }
+        ]
+      }
+    }
+  ],
+  "updatedAt": "2026-08-03T20:00:00.000Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-tours",
+  "excerpt": "Granite peaks, immense glaciers, turquoise lakes, and the wide Patagonian steppe.",
+  "author": "Travel Agency",
+  "publishedAt": "2026-08-03T20:00:00.000Z",
+  "categoryIds": [],
+  "fields": {
+    "summary": "Granite peaks, immense glaciers, turquoise lakes, and the wide Patagonian steppe.",
+    "heroImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=82&w=1600",
+    "heroImageAlt": "Snowy mountain range reflected in a clear lake",
+    "priceCurrency": "USD",
+    "durationRange": "12 days / 11 nights",
+    "transportSummary": "Coach, boat & hiking",
+    "badge": "Adventure",
+    "featured": true,
+    "sourceOrder": 4
+  }
+}

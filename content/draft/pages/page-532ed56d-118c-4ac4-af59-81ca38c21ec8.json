@@ -1,0 +1,56 @@
+{
+  "id": "page-532ed56d-118c-4ac4-af59-81ca38c21ec8",
+  "title": "New Page",
+  "slug": "new-page",
+  "status": "draft",
+  "seo": {
+    "title": "New Page",
+    "description": "da",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "WebPage"
+  },
+  "blocks": [
+    {
+      "id": "block-3be94f8d-7f28-46d9-a743-85d2b3f41380",
+      "type": "TEXT",
+      "content": {
+        "title": "Section Heading",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "New Structured Content"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Start building with deterministic blocks."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-30T14:54:58.530Z",
+  "kind": "page",
+  "name": "New Page",
+  "parentId": null,
+  "order": 99,
+  "showInNavigation": false,
+  "navigationLabel": "New Page"
+}

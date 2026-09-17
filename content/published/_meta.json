@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-14T01:58:52.407Z",
+  "order": {
+    "pages": [
+      "page-home",
+      "page-about",
+      "page-532ed56d-118c-4ac4-af59-81ca38c21ec8",
+      "page-663477ee-55ea-420e-865c-8bdd86ea4e38",
+      "page-2f9a8514-461e-4059-aea1-21fe646e3410",
+      "page-2540ac2c-d762-4eba-b06b-659d01e00073"
+    ],
+    "collectionDefinitions": [
+      "collection-articles",
+      "collection-products"
+    ],
+    "entries": [
+      "entry-static-first-cms",
+      "entry-e47488df-433c-4a69-bef8-4c7b4e1e9196",
+      "entry-bf06cfd6-3936-48f2-b4f4-41b6e6b0adde"
+    ],
+    "categories": [
+      "category-guides",
+      "category-news"
+    ],
+    "sharedBlocks": [],
+    "navigation": [
+      "nav-header",
+      "nav-footer",
+      "nav-7b72257a-c92b-486e-b381-40fc8e2cddcb"
+    ],
+    "assets": [],
+    "redirects": []
+  }
+}

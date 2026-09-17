@@ -1,0 +1,50 @@
+{
+  "id": "entry-static-first-cms",
+  "title": "How static-first CMS publishing works",
+  "slug": "static-first-cms",
+  "status": "published",
+  "seo": {
+    "title": "How static-first CMS publishing works",
+    "description": "Learn how BlockForge keeps CMS editing flexible while rendering public pages as instant server-rendered Next.js HTML.",
+    "ogImage": "https://picsum.photos/1200/630?guide",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Article"
+  },
+  "blocks": [
+    {
+      "id": "block-entry-text",
+      "type": "TEXT",
+      "content": {
+        "title": "Draft dynamic, publish static",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The CMS writes draft JSON. Publishing validates the graph and creates a published snapshot. Next.js reads that snapshot during build and emits static HTML, metadata, schema, sitemap, and robots."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-29T00:00:00.000Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-articles",
+  "excerpt": "A practical look at editing content dynamically while serving visitors static Next.js pages.",
+  "author": "BlockForge",
+  "publishedAt": "2026-05-29T00:00:00.000Z",
+  "categoryIds": [
+    "category-guides"
+  ],
+  "fields": {
+    "readingTime": "4 min read",
+    "featuredImage": "https://picsum.photos/1200/630?guide"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "collection-tours",
+  "name": "Tours",
+  "singularName": "Tour",
+  "routeParentId": null,
+  "slug": "tours",
+  "description": "Repeatable tour pages with dates, prices, itinerary details, and enquiry content.",
+  "preset": "product",
+  "schemaType": "Product",
+  "entryTemplateId": "landing-page",
+  "indexTemplateId": "blog-index",
+  "hasBlocks": true,
+  "publicIndex": true,
+  "seo": {
+    "title": "Tours",
+    "description": "Browse carefully selected journeys with clear departure dates, indicative prices, travel styles, and detailed itineraries.",
+    "ogImage": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=82&w=1600",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "CollectionPage"
+  },
+  "fields": [
+    { "id": "summary", "label": "Short Summary", "type": "textarea", "required": true },
+    { "id": "heroImage", "label": "Featured Image", "type": "image", "required": true },
+    { "id": "heroImageAlt", "label": "Featured Image Alt", "type": "text", "required": false },
+    { "id": "priceCurrency", "label": "Currency", "type": "text", "required": false },
+    { "id": "durationRange", "label": "Duration", "type": "text", "required": false },
+    { "id": "transportSummary", "label": "Transport", "type": "text", "required": false },
+    { "id": "programmeUrl", "label": "Programme Link", "type": "url", "required": false }
+  ],
+  "categoryIds": [],
+  "updatedAt": "2026-08-03T20:00:00.000Z"
+}

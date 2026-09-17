@@ -1,0 +1,44 @@
+{
+  "id": "page-about",
+  "title": "About",
+  "slug": "about",
+  "status": "published",
+  "seo": {
+    "title": "About BlockForge",
+    "description": "Learn how BlockForge separates editing from rendering to create fast Next.js websites from structured content.",
+    "ogImage": "https://picsum.photos/1200/630?about",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "WebPage"
+  },
+  "blocks": [
+    {
+      "id": "block-about-text",
+      "type": "TEXT",
+      "content": {
+        "title": "A CMS that does not slow the website down",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "BlockForge treats the editor and the public website as two separate systems. The CMS stores structured content. Next.js renders the published snapshot into static pages."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-29T00:00:00.000Z",
+  "kind": "page",
+  "name": "About",
+  "parentId": null,
+  "order": 1,
+  "showInNavigation": true,
+  "navigationLabel": "About"
+}

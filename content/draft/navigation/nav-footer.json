@@ -1,0 +1,13 @@
+{
+  "id": "nav-footer",
+  "name": "Footer",
+  "location": "footer",
+  "items": [
+    {
+      "id": "nav-footer-cms",
+      "label": "CMS",
+      "targetType": "url",
+      "href": "/cms"
+    }
+  ]
+}

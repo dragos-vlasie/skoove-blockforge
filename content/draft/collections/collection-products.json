@@ -1,0 +1,42 @@
+{
+  "id": "collection-products",
+  "name": "Products",
+  "singularName": "Product",
+  "routeParentId": null,
+  "slug": "products",
+  "description": "Product-style pages with product schema.",
+  "preset": "product",
+  "schemaType": "Product",
+  "hasBlocks": true,
+  "publicIndex": false,
+  "seo": {
+    "title": "",
+    "description": "",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "CollectionPage"
+  },
+  "fields": [
+    {
+      "id": "price",
+      "label": "Price",
+      "type": "text",
+      "required": false
+    },
+    {
+      "id": "priceCurrency",
+      "label": "Currency",
+      "type": "text",
+      "required": false
+    },
+    {
+      "id": "sku",
+      "label": "SKU",
+      "type": "text",
+      "required": false
+    }
+  ],
+  "categoryIds": [],
+  "updatedAt": "2026-05-29T00:00:00.000Z"
+}

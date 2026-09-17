@@ -1,0 +1,106 @@
+{
+  "id": "page-home",
+  "title": "Home",
+  "slug": "/",
+  "status": "published",
+  "seo": {
+    "title": "BlockForge | Next.js CMS",
+    "description": "Build instant websites from structured CMS content with Next.js, schema, SEO, and deterministic JSON publishing.",
+    "ogImage": "https://picsum.photos/1200/630",
+    "keywords": "next.js cms, static cms, json cms, block editor",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "WebPage"
+  },
+  "blocks": [
+    {
+      "id": "block-home-hero",
+      "type": "HERO",
+      "content": {
+        "layout": "theme",
+        "title": "Instant test and websites from structured content",
+        "subtitle": "BlockForge edits pages, collections, categories, SEO, and schema, then publishes deterministic JSON for Next.js to render as server-generated HTML.",
+        "buttonText": "Read the guide",
+        "bgImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
+        "imageAlt": "Earth viewed from orbit"
+      }
+    },
+    {
+      "id": "block-home-text",
+      "type": "TEXT",
+      "content": {
+        "title": "Built for speed and control",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "CMS data without runtime drag"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 4
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Editors work inside a protected"
+                }
+              ]
+            },
+            {
+              "type": "horizontalRule"
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": " CMS. Public visitors get prerendered Next.js pages with canonical URLs, OpenGraph tags, JSON-LD, sitemap, robots, and no CMS JavaScript."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "block-home-features",
+      "type": "FEATURES",
+      "content": {
+        "presentation": "theme",
+        "title": "Core CMS foundations",
+        "items": [
+          {
+            "title": "Configurable collections",
+            "description": "Articles, docs, products, case studies, people, and generic entries are presets, not hardcoded limits."
+          },
+          {
+            "title": "Optional category pages",
+            "description": "Categories can organize content privately or generate public collection pages when enabled."
+          },
+          {
+            "title": "SEO-first publishing",
+            "description": "Validation catches missing metadata, duplicate paths, broken references, and missing image alt text before publish."
+          }
+        ]
+      }
+    }
+  ],
+  "updatedAt": "2026-06-14T01:58:51.188Z",
+  "kind": "page",
+  "name": "Home Page",
+  "parentId": null,
+  "order": 0,
+  "showInNavigation": true,
+  "navigationLabel": "Home"
+}

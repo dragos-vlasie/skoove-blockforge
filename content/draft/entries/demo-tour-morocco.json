@@ -1,0 +1,70 @@
+{
+  "id": "demo-tour-morocco",
+  "title": "Morocco: Medinas, Atlas & Sahara",
+  "slug": "morocco-medinas-atlas-sahara",
+  "status": "published",
+  "seo": {
+    "title": "Morocco: Medinas, Atlas & Sahara",
+    "description": "Explore Marrakech, cross the High Atlas, and spend a night beneath the stars at the edge of the Sahara.",
+    "ogImage": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=82&w=1600",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "Product"
+  },
+  "blocks": [
+    {
+      "id": "demo-tour-morocco-overview",
+      "type": "VIET_TOUR_OVERVIEW",
+      "content": {
+        "eyebrow": "Desert journey",
+        "title": "Morocco: Medinas, Atlas & Sahara",
+        "summary": "A colourful route through old medinas, earthen kasbahs, mountain passes, and the wide silence of the desert.",
+        "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=82&w=1600",
+        "imageAlt": "Warm-toned Moroccan market street",
+        "priceLabel": "From",
+        "price": "$1,890",
+        "facts": [
+          { "label": "Duration", "value": "8 days / 7 nights" },
+          { "label": "Transport", "value": "Private minibus" },
+          { "label": "Departure", "value": "Marrakech" },
+          { "label": "Travel style", "value": "Adventure" }
+        ],
+        "primaryLabel": "Plan this trip",
+        "primaryHref": "#travel-enquiry",
+        "backLabel": "All tours",
+        "backHref": "/tours/"
+      }
+    },
+    {
+      "id": "demo-tour-morocco-departures",
+      "type": "VIET_DEPARTURE_SCHEDULE",
+      "content": {
+        "eyebrow": "Choose your date",
+        "title": "Upcoming departures",
+        "introduction": "Indicative dates and prices for the next season.",
+        "departures": [
+          { "id": "ma-1", "date": "2026-10-03", "duration": "8 days / 7 nights", "price": "$1,890", "status": "Available", "note": "Guaranteed departure" },
+          { "id": "ma-2", "date": "2027-03-13", "duration": "8 days / 7 nights", "price": "$1,990", "status": "Available", "note": "Spring departure" }
+        ]
+      }
+    }
+  ],
+  "updatedAt": "2026-08-03T20:00:00.000Z",
+  "kind": "collectionEntry",
+  "collectionId": "collection-tours",
+  "excerpt": "Marrakech, the High Atlas, ancient kasbahs, and a night under Sahara stars.",
+  "author": "Travel Agency",
+  "publishedAt": "2026-08-03T20:00:00.000Z",
+  "categoryIds": [],
+  "fields": {
+    "summary": "Marrakech, the High Atlas, ancient kasbahs, and a night under Sahara stars.",
+    "heroImage": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=82&w=1600",
+    "heroImageAlt": "Warm-toned Moroccan market street",
+    "priceCurrency": "USD",
+    "durationRange": "8 days / 7 nights",
+    "transportSummary": "Private minibus",
+    "badge": "New",
+    "featured": true,
+    "sourceOrder": 2
+  }
+}

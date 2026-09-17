@@ -1,0 +1,56 @@
+{
+  "id": "page-2f9a8514-461e-4059-aea1-21fe646e3410",
+  "title": "New Page 3",
+  "slug": "new-page-3",
+  "status": "draft",
+  "seo": {
+    "title": "New Page 3",
+    "description": "dada",
+    "ogImage": "",
+    "robots": "index,follow",
+    "twitterCard": "summary_large_image",
+    "schemaType": "WebPage"
+  },
+  "blocks": [
+    {
+      "id": "block-8b2dc3ca-79cf-4303-960d-e6764ce7b0e5",
+      "type": "TEXT",
+      "content": {
+        "title": "Section Heading",
+        "nodes": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "New Structured Content"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Start building with deterministic blocks."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-05-30T15:06:27.125Z",
+  "kind": "page",
+  "name": "New Page 3",
+  "parentId": null,
+  "order": 99,
+  "showInNavigation": false,
+  "navigationLabel": "New Page 3"
+}
