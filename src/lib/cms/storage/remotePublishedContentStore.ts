@@ -42,10 +42,9 @@ export class RemotePublishedContentStore implements ContentStore {
     url.searchParams.set("tenant", this.config.tenantId);
     url.searchParams.set("site", this.config.siteId);
     const response = await fetch(url, {
-      // Published graphs can exceed Vercel's 2 MB data-cache limit. Retrying a
-      // failed cache write leaves an older graph in place, so remote sites must
-      // read directly from the published-content endpoint.
-      cache: "no-store" as const,
+      ...(this.config.revalidateSeconds > 0
+        ? { next: { revalidate: this.config.revalidateSeconds } }
+        : { cache: "no-store" as const }),
     });
     if (!response.ok) {
       throw new Error(`BlockForge published-content request failed (${response.status}).`);
