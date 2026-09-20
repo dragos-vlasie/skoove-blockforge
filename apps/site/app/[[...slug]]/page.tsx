@@ -6,6 +6,7 @@ import { PublicSite, routeMetadata } from "../../../../src/next/PublicSite";
 import { resolvePublishedRoute } from "../../../../src/next/resolveRoute";
 
 type Props = { params: Promise<{ slug?: string[] }> };
+export const dynamic = "force-dynamic";
 const pathOf = (segments: string[] = []) => withTrailingSlash(segments.length ? `/${segments.join("/")}` : "/");
 
 async function loadRoute(params: Props["params"]) {
