@@ -19,6 +19,8 @@ import {
 import { createSemanticThemeStyle } from "../themes/semanticTokens";
 import { getGoogleFontHref, getThemePreset } from "../themes/registry";
 import { AnalyticsTracker } from "./AnalyticsTracker";
+import { SkooveChrome } from "../installations/skoove/SkooveChrome";
+import { SkooveTemplateRenderer } from "../installations/skoove/SkooveTemplates";
 import { TemplateRenderer } from "./Templates";
 
 function DesktopNavigation({ items, graph, label }: { items: any[]; graph: any; label: string }) {
@@ -104,7 +106,11 @@ export function PublicSite({ route, preview = false }: { route: any; preview?: b
   const jsonLd = buildJsonLd({ graph: route.graph, subject: route.subject, path: route.path, collection: route.collection, crumbs, collectionItems });
   const hero = route.subject.blocks?.find((block: any) => ["HERO", "RENTAL_HERO", "PUBLICATION_HERO", "PUBLICATION_GATEWAY_CAROUSEL"].includes(block.type));
   const heroImage = (hero?.type === "RENTAL_HERO" ? hero.content?.imageUrl : hero?.type === "PUBLICATION_HERO" ? hero.content?.portraitImage : hero?.type === "PUBLICATION_GATEWAY_CAROUSEL" ? hero.content?.items?.[0]?.image : hero?.content?.bgImage) || route.subject.fields?.featuredImage || "";
-  return <>{heroImage && <link rel="preload" as="image" href={heroImage} fetchPriority="high" />}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} /><SiteChrome graph={route.graph} subject={route.subject} preview={preview}><TemplateRenderer route={route} /></SiteChrome></>;
+  const isSkooveBlog = route.graph.site.siteName === "Skoove Blog";
+  const page = isSkooveBlog
+    ? <SkooveChrome graph={route.graph} subject={route.subject}><SkooveTemplateRenderer route={route} /></SkooveChrome>
+    : <SiteChrome graph={route.graph} subject={route.subject} preview={preview}><TemplateRenderer route={route} /></SiteChrome>;
+  return <>{heroImage && <link rel="preload" as="image" href={heroImage} fetchPriority="high" />}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />{page}</>;
 }
 
 export const routeMetadata = (route: any) => {

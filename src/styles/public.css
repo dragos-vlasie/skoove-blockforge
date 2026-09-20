@@ -50,6 +50,42 @@
   --site-media-shadow: none;
 }
 
+[data-site-theme="skoove-magazine"] {
+  font-family: "Lato", sans-serif;
+  --site-primary: #00524f;
+  --site-primary-strong: #103133;
+  --site-accent: #2ec39f;
+  --site-background: #f5f5f5;
+  --site-surface: #ffffff;
+  --site-surface-soft: #e8eeee;
+  --site-surface-strong: #d8e3e3;
+  --site-text: #103133;
+  --site-heading: #103133;
+  --site-muted: #467071;
+  --site-border: #ccd9d9;
+  --site-on-primary: #ffffff;
+  --site-on-accent: #103133;
+  --site-inverse: #00524f;
+  --site-on-inverse: #ffffff;
+  --site-radius: 0px;
+  --site-radius-sm: 0px;
+  --site-radius-lg: 0px;
+  --site-card-radius: 0px;
+  --site-media-radius: 0px;
+  --site-button-radius: 0px;
+  --site-container-width: 69rem;
+  --site-gutter: clamp(1.25rem, 4vw, 2rem);
+  --site-section-space: clamp(3rem, 6vw, 5rem);
+  --site-section-space-compact: clamp(2rem, 4vw, 3rem);
+  --site-heading-weight: 700;
+  --site-heading-tracking: 0;
+  --site-heading-leading: 1.25;
+  --site-card-shadow: none;
+  --site-media-shadow: none;
+  --font-heading: "Lato", sans-serif;
+  --font-body: "Lato", sans-serif;
+}
+
 @layer base {
   *,
   *::before,

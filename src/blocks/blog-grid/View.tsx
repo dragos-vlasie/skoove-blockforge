@@ -27,6 +27,8 @@ export function BlogGridView({
   const listing = resolvedListing ?? resolveBlogGridListing(content, graph, Number(page) || 1);
   const posts = listing.posts.length ? listing.posts : Array.isArray(content.posts) ? content.posts : [];
   const HeadingTag = content.headingLevel === "h1" ? "h1" : "h2";
+  const isSkoove = graph?.site?.siteName === "Skoove Blog";
+  const SectionHeadingTag = isSkoove ? "h1" : HeadingTag;
   const layout = ["editorial", "cards", "compact", "portal-mosaic", "lead-mosaic", "publication-feed", "story-lane", "portrait-grid", "numbered-list", "popular-featured"].includes(content.layout)
     ? content.layout
     : "editorial";
@@ -50,7 +52,7 @@ export function BlogGridView({
       key={post.id || index}
       href={post.href || "#"}
       className={cx(
-        cardBase,
+        isSkoove ? "group min-w-0 bg-white text-[#103133] no-underline" : cardBase,
         isStoryLane && "w-[min(78vw,24rem)] shrink-0 snap-start border-0 bg-transparent shadow-none hover:translate-y-0 hover:shadow-none",
         layout === "portrait-grid" && "border-0 bg-transparent shadow-none hover:translate-y-0 hover:shadow-none",
         isOverlayGrid && "relative min-h-[22rem] border-0 bg-[var(--site-inverse)] text-[var(--site-on-inverse)]",
@@ -59,7 +61,7 @@ export function BlogGridView({
     >
       {isNumbered && <span className="text-center font-[var(--font-heading)] text-2xl text-[var(--site-accent)]">{String(index + 1).padStart(2, "0")}</span>}
       {post.image && (
-        <figure className={cx("m-0 overflow-hidden bg-[var(--site-surface-strong)]", isNumbered ? "aspect-square rounded-[var(--site-media-radius)]" : "aspect-[4/3]", (isStoryLane || layout === "portrait-grid") && "aspect-[4/5] rounded-[var(--site-media-radius)]", isOverlayGrid && "absolute inset-0 h-full")}>
+        <figure className={cx("m-0 overflow-hidden bg-[var(--site-surface-strong)]", isNumbered ? "aspect-square rounded-[var(--site-media-radius)]" : isSkoove ? "aspect-[1.214/1]" : "aspect-[4/3]", (isStoryLane || layout === "portrait-grid") && "aspect-[4/5] rounded-[var(--site-media-radius)]", isOverlayGrid && "absolute inset-0 h-full")}>
           <img src={post.image} alt={post.imageAlt || post.title || ""} loading="lazy" decoding="async" className={cardImage} style={{ objectPosition: post.imagePosition || "center" }} />
           {isOverlayGrid && <span className="absolute inset-0 bg-gradient-to-t from-[color-mix(in_srgb,var(--site-inverse)_92%,transparent)] via-[color-mix(in_srgb,var(--site-inverse)_20%,transparent)] to-transparent" aria-hidden="true" />}
         </figure>
@@ -74,13 +76,13 @@ export function BlogGridView({
   );
 
   return (
-    <section className={ui.section} data-layout={layout} aria-labelledby={headingId}>
-      <div className={ui.container}>
+    <section className={isSkoove ? "w-full bg-[#f5f5f5] px-5 pb-8 pt-12 text-[#103133] sm:px-8" : ui.section} data-layout={layout} aria-labelledby={headingId}>
+      <div className={isSkoove ? "mx-auto w-full max-w-[69rem]" : ui.container}>
         {(content.eyebrow || content.title || content.subtitle || (isStoryLane && posts.length > 1)) && (
-          <header className="mb-8 flex flex-wrap items-end justify-between gap-6 sm:mb-10" data-blog-grid-heading>
+          <header className={isSkoove ? "mb-10 flex flex-wrap items-end justify-between gap-6" : "mb-8 flex flex-wrap items-end justify-between gap-6 sm:mb-10"} data-blog-grid-heading>
             <div className="max-w-4xl">
               {content.eyebrow && <p className={ui.eyebrow}>{content.eyebrow}</p>}
-              {content.title && <HeadingTag className={ui.heading} id={headingId}>{content.title}</HeadingTag>}
+              {content.title && <SectionHeadingTag className={ui.heading} id={headingId}>{content.title}</SectionHeadingTag>}
               {content.subtitle && <p className={ui.copy}>{content.subtitle}</p>}
             </div>
             {isStoryLane && posts.length > 1 && <div className="flex gap-2" aria-label="Story carousel controls"><button className={paginationButton} type="button" data-carousel-previous aria-label="Show previous stories">←</button><button className={paginationButton} type="button" data-carousel-next aria-label="Show next stories">→</button></div>}
