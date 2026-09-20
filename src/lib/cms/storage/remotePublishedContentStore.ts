@@ -41,6 +41,11 @@ export class RemotePublishedContentStore implements ContentStore {
     const url = new URL("/api/public/content/", this.config.baseUrl);
     url.searchParams.set("tenant", this.config.tenantId);
     url.searchParams.set("site", this.config.siteId);
+    const bypassCache = this.config.revalidateSeconds === 0;
+    // `cache: "no-store"` prevents Next from writing its data cache, but an
+    // upstream CDN may still serve a stale response for the stable URL. A
+    // zero-second interval explicitly requests a fresh published snapshot.
+    if (bypassCache) url.searchParams.set("_", String(Date.now()));
     const response = await fetch(url, {
       ...(this.config.revalidateSeconds > 0
         ? { next: { revalidate: this.config.revalidateSeconds } }
