@@ -133,8 +133,8 @@ export function TextView({ content }: { content: any }) {
 
   if (content.variant === "article") {
     return (
-      <section className="w-full min-w-0 py-6 text-[var(--site-text)]">
-        <div className="mx-auto w-full max-w-[48rem]">
+      <section className="w-full min-w-0 py-4 text-[var(--site-text)]">
+        <div className="mx-auto w-full max-w-[58.125rem]">
           {content.title && (
             <h2 className="mb-8 font-[var(--font-heading)] text-3xl font-extrabold tracking-tight text-[var(--site-heading)] sm:text-4xl">{content.title}</h2>
           )}

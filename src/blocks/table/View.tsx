@@ -40,7 +40,7 @@ export function TableView({ content }: { content: any }) {
 
   if (!headers.length && !rows.length) {
     return (
-      <section className={isArticle ? ui.sectionCompact : ui.section} data-presentation={presentation} data-variant={isArticle ? "article" : "section"}>
+      <section className={isArticle ? "w-full min-w-0 py-4" : ui.section} data-presentation={presentation} data-variant={isArticle ? "article" : "section"}>
         <div className={cx(ui.container, "rounded-[var(--site-radius-sm)] border border-dashed border-[var(--site-border)] p-8 text-center text-[var(--site-muted)]")}>
           Table has no rows yet.
         </div>
@@ -49,8 +49,8 @@ export function TableView({ content }: { content: any }) {
   }
 
   return (
-    <section className={isArticle ? ui.sectionCompact : ui.section} data-presentation={presentation} data-variant={isArticle ? "article" : "section"}>
-      <div className={ui.container}>
+    <section className={isArticle ? "w-full min-w-0 py-4" : ui.section} data-presentation={presentation} data-variant={isArticle ? "article" : "section"}>
+      <div className={isArticle ? "mx-auto w-full max-w-[58.125rem]" : ui.container}>
         <div className="hidden overflow-x-auto rounded-[var(--site-radius-sm)] border border-[var(--site-border)] sm:block">
           <table className="w-full min-w-[42rem] border-collapse bg-[var(--site-background)] text-left text-sm text-[var(--site-text)]">
             {caption && (
