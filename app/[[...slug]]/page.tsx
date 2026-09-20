@@ -13,7 +13,9 @@ async function loadRoute(params: Props["params"]) {
   const path = pathOf((await params).slug);
   const rule = graph.redirects.find((candidate) => withTrailingSlash(candidate.from) === path);
   if (rule) rule.status === 301 ? permanentRedirect(rule.to) : redirect(rule.to);
-  return resolvePublishedRoute(graph, path);
+  const route = resolvePublishedRoute(graph, path);
+  if (route || graph.site.siteName !== "Skoove Blog") return route;
+  return resolvePublishedRoute(graph, withTrailingSlash(`/blog${path}`));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
