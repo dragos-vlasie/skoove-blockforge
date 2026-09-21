@@ -4,6 +4,7 @@ import { useEffect, useState, type MouseEvent } from "react";
 import {
   isPreviewMessage,
   previewMessageType,
+  previewProtocolVersion,
   type ParentToPreviewMessage,
   type PreviewToParentMessage,
   type RemotePreviewRoute,
@@ -25,6 +26,12 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
 
       if (message.type === previewMessageType.render) {
         setRoute(message.route);
+        setActiveBlockId(message.activeBlockId ?? null);
+      }
+      if (message.type === previewMessageType.updateSubject) {
+        setRoute((current) => current ? { ...current, subject: message.subject } : current);
+      }
+      if (message.type === previewMessageType.setActiveBlock) {
         setActiveBlockId(message.activeBlockId ?? null);
       }
       if (message.type === previewMessageType.scrollTo) {
@@ -51,7 +58,7 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
 
     window.addEventListener("message", receive);
     window.addEventListener("scroll", reportScroll, { passive: true });
-    sendToParent({ type: previewMessageType.ready }, parentOrigin);
+    sendToParent({ type: previewMessageType.ready, protocolVersion: previewProtocolVersion }, parentOrigin);
     return () => {
       window.removeEventListener("message", receive);
       window.removeEventListener("scroll", reportScroll);
