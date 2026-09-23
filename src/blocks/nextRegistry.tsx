@@ -67,75 +67,78 @@ import { Preview as Preview20 } from "./rental-problem/Preview";
 import definition21 from "./shared-block/definition";
 import { SharedBlockView } from "./shared-block/View";
 import { Preview as Preview21 } from "./shared-block/Preview";
-import definition22 from "./stats/definition";
+import definition22 from "./spacer/definition";
+import { SpacerView } from "./spacer/View";
+import { Preview as Preview22 } from "./spacer/Preview";
+import definition23 from "./stats/definition";
 import { StatsView } from "./stats/View";
-import { Preview as Preview22 } from "./stats/Preview";
-import definition23 from "./table/definition";
+import { Preview as Preview23 } from "./stats/Preview";
+import definition24 from "./table/definition";
 import { TableView } from "./table/View";
-import { Preview as Preview23 } from "./table/Preview";
-import definition24 from "./testimonials/definition";
+import { Preview as Preview24 } from "./table/Preview";
+import definition25 from "./testimonials/definition";
 import { TestimonialsView } from "./testimonials/View";
-import { Preview as Preview24 } from "./testimonials/Preview";
-import definition25 from "./text/definition";
+import { Preview as Preview25 } from "./testimonials/Preview";
+import definition26 from "./text/definition";
 import { TextView } from "./text/View";
-import { Preview as Preview25 } from "./text/Preview";
-import definition26 from "./../packs/travel-agency/blocks/viet-contact-cta/definition";
+import { Preview as Preview26 } from "./text/Preview";
+import definition27 from "./../packs/travel-agency/blocks/viet-contact-cta/definition";
 import { VietContactCtaView } from "./../packs/travel-agency/blocks/viet-contact-cta/View";
-import { Preview as Preview26 } from "./../packs/travel-agency/blocks/viet-contact-cta/Preview";
-import definition27 from "./../packs/travel-agency/blocks/viet-departure-schedule/definition";
+import { Preview as Preview27 } from "./../packs/travel-agency/blocks/viet-contact-cta/Preview";
+import definition28 from "./../packs/travel-agency/blocks/viet-departure-schedule/definition";
 import { VietDepartureScheduleView } from "./../packs/travel-agency/blocks/viet-departure-schedule/View";
-import { Preview as Preview27 } from "./../packs/travel-agency/blocks/viet-departure-schedule/Preview";
-import definition28 from "./../packs/travel-agency/blocks/viet-editorial-hero/definition";
+import { Preview as Preview28 } from "./../packs/travel-agency/blocks/viet-departure-schedule/Preview";
+import definition29 from "./../packs/travel-agency/blocks/viet-editorial-hero/definition";
 import { VietEditorialHeroView } from "./../packs/travel-agency/blocks/viet-editorial-hero/View";
-import { Preview as Preview28 } from "./../packs/travel-agency/blocks/viet-editorial-hero/Preview";
-import definition29 from "./../packs/travel-agency/blocks/viet-featured-offer/definition";
+import { Preview as Preview29 } from "./../packs/travel-agency/blocks/viet-editorial-hero/Preview";
+import definition30 from "./../packs/travel-agency/blocks/viet-featured-offer/definition";
 import { VietFeaturedOfferView } from "./../packs/travel-agency/blocks/viet-featured-offer/View";
-import { Preview as Preview29 } from "./../packs/travel-agency/blocks/viet-featured-offer/Preview";
-import definition30 from "./../packs/travel-agency/blocks/viet-journey-grid/definition";
+import { Preview as Preview30 } from "./../packs/travel-agency/blocks/viet-featured-offer/Preview";
+import definition31 from "./../packs/travel-agency/blocks/viet-journey-grid/definition";
 import { VietJourneyGridView } from "./../packs/travel-agency/blocks/viet-journey-grid/View";
-import { Preview as Preview30 } from "./../packs/travel-agency/blocks/viet-journey-grid/Preview";
-import definition31 from "./../packs/travel-agency/blocks/viet-programme-link/definition";
+import { Preview as Preview31 } from "./../packs/travel-agency/blocks/viet-journey-grid/Preview";
+import definition32 from "./../packs/travel-agency/blocks/viet-programme-link/definition";
 import { VietProgrammeLinkView } from "./../packs/travel-agency/blocks/viet-programme-link/View";
-import { Preview as Preview31 } from "./../packs/travel-agency/blocks/viet-programme-link/Preview";
-import definition32 from "./../packs/travel-agency/blocks/viet-section-heading/definition";
+import { Preview as Preview32 } from "./../packs/travel-agency/blocks/viet-programme-link/Preview";
+import definition33 from "./../packs/travel-agency/blocks/viet-section-heading/definition";
 import { VietSectionHeadingView } from "./../packs/travel-agency/blocks/viet-section-heading/View";
-import { Preview as Preview32 } from "./../packs/travel-agency/blocks/viet-section-heading/Preview";
-import definition33 from "./../packs/travel-agency/blocks/viet-tour-catalogue/definition";
+import { Preview as Preview33 } from "./../packs/travel-agency/blocks/viet-section-heading/Preview";
+import definition34 from "./../packs/travel-agency/blocks/viet-tour-catalogue/definition";
 import { VietTourCatalogueView } from "./../packs/travel-agency/blocks/viet-tour-catalogue/View";
-import { Preview as Preview33 } from "./../packs/travel-agency/blocks/viet-tour-catalogue/Preview";
-import definition34 from "./../packs/travel-agency/blocks/viet-tour-enquiry/definition";
+import { Preview as Preview34 } from "./../packs/travel-agency/blocks/viet-tour-catalogue/Preview";
+import definition35 from "./../packs/travel-agency/blocks/viet-tour-enquiry/definition";
 import { VietTourEnquiryView } from "./../packs/travel-agency/blocks/viet-tour-enquiry/View";
-import { Preview as Preview34 } from "./../packs/travel-agency/blocks/viet-tour-enquiry/Preview";
-import definition35 from "./../packs/travel-agency/blocks/viet-tour-overview/definition";
+import { Preview as Preview35 } from "./../packs/travel-agency/blocks/viet-tour-enquiry/Preview";
+import definition36 from "./../packs/travel-agency/blocks/viet-tour-overview/definition";
 import { VietTourOverviewView } from "./../packs/travel-agency/blocks/viet-tour-overview/View";
-import { Preview as Preview35 } from "./../packs/travel-agency/blocks/viet-tour-overview/Preview";
-import definition36 from "./../packs/travel-agency/blocks/viet-tour-package/definition";
+import { Preview as Preview36 } from "./../packs/travel-agency/blocks/viet-tour-overview/Preview";
+import definition37 from "./../packs/travel-agency/blocks/viet-tour-package/definition";
 import { VietTourPackageView } from "./../packs/travel-agency/blocks/viet-tour-package/View";
-import { Preview as Preview36 } from "./../packs/travel-agency/blocks/viet-tour-package/Preview";
-import definition37 from "./../packs/travel-agency/blocks/viet-tour-story/definition";
+import { Preview as Preview37 } from "./../packs/travel-agency/blocks/viet-tour-package/Preview";
+import definition38 from "./../packs/travel-agency/blocks/viet-tour-story/definition";
 import { VietTourStoryView } from "./../packs/travel-agency/blocks/viet-tour-story/View";
-import { Preview as Preview37 } from "./../packs/travel-agency/blocks/viet-tour-story/Preview";
-import definition38 from "./../packs/travel-agency/blocks/viet-trust-strip/definition";
+import { Preview as Preview38 } from "./../packs/travel-agency/blocks/viet-tour-story/Preview";
+import definition39 from "./../packs/travel-agency/blocks/viet-trust-strip/definition";
 import { VietTrustStripView } from "./../packs/travel-agency/blocks/viet-trust-strip/View";
-import { Preview as Preview38 } from "./../packs/travel-agency/blocks/viet-trust-strip/Preview";
-import definition39 from "./two-column/definition";
+import { Preview as Preview39 } from "./../packs/travel-agency/blocks/viet-trust-strip/Preview";
+import definition40 from "./two-column/definition";
 import { TwoColumnView } from "./two-column/View";
-import { Preview as Preview39 } from "./two-column/Preview";
-import definition40 from "./ui-accordion/definition";
+import { Preview as Preview40 } from "./two-column/Preview";
+import definition41 from "./ui-accordion/definition";
 import { UiAccordionView } from "./ui-accordion/View";
-import { Preview as Preview40 } from "./ui-accordion/Preview";
-import definition41 from "./ui-button-cta/definition";
+import { Preview as Preview41 } from "./ui-accordion/Preview";
+import definition42 from "./ui-button-cta/definition";
 import { UiButtonCtaView } from "./ui-button-cta/View";
-import { Preview as Preview41 } from "./ui-button-cta/Preview";
-import definition42 from "./ui-card-grid/definition";
+import { Preview as Preview42 } from "./ui-button-cta/Preview";
+import definition43 from "./ui-card-grid/definition";
 import { UiCardGridView } from "./ui-card-grid/View";
-import { Preview as Preview42 } from "./ui-card-grid/Preview";
-import definition43 from "./ui-tabs/definition";
+import { Preview as Preview43 } from "./ui-card-grid/Preview";
+import definition44 from "./ui-tabs/definition";
 import { UiTabsView } from "./ui-tabs/View";
-import { Preview as Preview43 } from "./ui-tabs/Preview";
-import definition44 from "./video-embed/definition";
+import { Preview as Preview44 } from "./ui-tabs/Preview";
+import definition45 from "./video-embed/definition";
 import { VideoEmbedView } from "./video-embed/View";
-import { Preview as Preview44 } from "./video-embed/Preview";
+import { Preview as Preview45 } from "./video-embed/Preview";
 
 export const nextBlockEntries = [
   { definition: definition0, folder: "blog-grid", moduleRoot: "./blog-grid" },
@@ -160,29 +163,30 @@ export const nextBlockEntries = [
   { definition: definition19, folder: "rental-image-text", moduleRoot: "./rental-image-text" },
   { definition: definition20, folder: "rental-problem", moduleRoot: "./rental-problem" },
   { definition: definition21, folder: "shared-block", moduleRoot: "./shared-block" },
-  { definition: definition22, folder: "stats", moduleRoot: "./stats" },
-  { definition: definition23, folder: "table", moduleRoot: "./table" },
-  { definition: definition24, folder: "testimonials", moduleRoot: "./testimonials" },
-  { definition: definition25, folder: "text", moduleRoot: "./text" },
-  { definition: definition26, folder: "viet-contact-cta", moduleRoot: "./../packs/travel-agency/blocks/viet-contact-cta" },
-  { definition: definition27, folder: "viet-departure-schedule", moduleRoot: "./../packs/travel-agency/blocks/viet-departure-schedule" },
-  { definition: definition28, folder: "viet-editorial-hero", moduleRoot: "./../packs/travel-agency/blocks/viet-editorial-hero" },
-  { definition: definition29, folder: "viet-featured-offer", moduleRoot: "./../packs/travel-agency/blocks/viet-featured-offer" },
-  { definition: definition30, folder: "viet-journey-grid", moduleRoot: "./../packs/travel-agency/blocks/viet-journey-grid" },
-  { definition: definition31, folder: "viet-programme-link", moduleRoot: "./../packs/travel-agency/blocks/viet-programme-link" },
-  { definition: definition32, folder: "viet-section-heading", moduleRoot: "./../packs/travel-agency/blocks/viet-section-heading" },
-  { definition: definition33, folder: "viet-tour-catalogue", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-catalogue" },
-  { definition: definition34, folder: "viet-tour-enquiry", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-enquiry" },
-  { definition: definition35, folder: "viet-tour-overview", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-overview" },
-  { definition: definition36, folder: "viet-tour-package", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-package" },
-  { definition: definition37, folder: "viet-tour-story", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-story" },
-  { definition: definition38, folder: "viet-trust-strip", moduleRoot: "./../packs/travel-agency/blocks/viet-trust-strip" },
-  { definition: definition39, folder: "two-column", moduleRoot: "./two-column" },
-  { definition: definition40, folder: "ui-accordion", moduleRoot: "./ui-accordion" },
-  { definition: definition41, folder: "ui-button-cta", moduleRoot: "./ui-button-cta" },
-  { definition: definition42, folder: "ui-card-grid", moduleRoot: "./ui-card-grid" },
-  { definition: definition43, folder: "ui-tabs", moduleRoot: "./ui-tabs" },
-  { definition: definition44, folder: "video-embed", moduleRoot: "./video-embed" },
+  { definition: definition22, folder: "spacer", moduleRoot: "./spacer" },
+  { definition: definition23, folder: "stats", moduleRoot: "./stats" },
+  { definition: definition24, folder: "table", moduleRoot: "./table" },
+  { definition: definition25, folder: "testimonials", moduleRoot: "./testimonials" },
+  { definition: definition26, folder: "text", moduleRoot: "./text" },
+  { definition: definition27, folder: "viet-contact-cta", moduleRoot: "./../packs/travel-agency/blocks/viet-contact-cta" },
+  { definition: definition28, folder: "viet-departure-schedule", moduleRoot: "./../packs/travel-agency/blocks/viet-departure-schedule" },
+  { definition: definition29, folder: "viet-editorial-hero", moduleRoot: "./../packs/travel-agency/blocks/viet-editorial-hero" },
+  { definition: definition30, folder: "viet-featured-offer", moduleRoot: "./../packs/travel-agency/blocks/viet-featured-offer" },
+  { definition: definition31, folder: "viet-journey-grid", moduleRoot: "./../packs/travel-agency/blocks/viet-journey-grid" },
+  { definition: definition32, folder: "viet-programme-link", moduleRoot: "./../packs/travel-agency/blocks/viet-programme-link" },
+  { definition: definition33, folder: "viet-section-heading", moduleRoot: "./../packs/travel-agency/blocks/viet-section-heading" },
+  { definition: definition34, folder: "viet-tour-catalogue", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-catalogue" },
+  { definition: definition35, folder: "viet-tour-enquiry", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-enquiry" },
+  { definition: definition36, folder: "viet-tour-overview", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-overview" },
+  { definition: definition37, folder: "viet-tour-package", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-package" },
+  { definition: definition38, folder: "viet-tour-story", moduleRoot: "./../packs/travel-agency/blocks/viet-tour-story" },
+  { definition: definition39, folder: "viet-trust-strip", moduleRoot: "./../packs/travel-agency/blocks/viet-trust-strip" },
+  { definition: definition40, folder: "two-column", moduleRoot: "./two-column" },
+  { definition: definition41, folder: "ui-accordion", moduleRoot: "./ui-accordion" },
+  { definition: definition42, folder: "ui-button-cta", moduleRoot: "./ui-button-cta" },
+  { definition: definition43, folder: "ui-card-grid", moduleRoot: "./ui-card-grid" },
+  { definition: definition44, folder: "ui-tabs", moduleRoot: "./ui-tabs" },
+  { definition: definition45, folder: "video-embed", moduleRoot: "./video-embed" },
 ] as const;
 
 export const nextBlockViews = {
@@ -208,6 +212,7 @@ export const nextBlockViews = {
   [BlockType.RENTAL_IMAGE_TEXT]: RentalImageTextView,
   [BlockType.RENTAL_PROBLEM]: RentalProblemView,
   [BlockType.SHARED_BLOCK]: SharedBlockView,
+  [BlockType.SPACER]: SpacerView,
   [BlockType.STATS]: StatsView,
   [BlockType.TABLE]: TableView,
   [BlockType.TESTIMONIALS]: TestimonialsView,
@@ -256,27 +261,28 @@ export const nextBlockPreviews = {
   [BlockType.RENTAL_IMAGE_TEXT]: Preview19,
   [BlockType.RENTAL_PROBLEM]: Preview20,
   [BlockType.SHARED_BLOCK]: Preview21,
-  [BlockType.STATS]: Preview22,
-  [BlockType.TABLE]: Preview23,
-  [BlockType.TESTIMONIALS]: Preview24,
-  [BlockType.TEXT]: Preview25,
-  [BlockType.TRAVEL_CONTACT_CTA]: Preview26,
-  [BlockType.TRAVEL_DEPARTURE_SCHEDULE]: Preview27,
-  [BlockType.TRAVEL_EDITORIAL_HERO]: Preview28,
-  [BlockType.TRAVEL_FEATURED_OFFER]: Preview29,
-  [BlockType.TRAVEL_JOURNEY_GRID]: Preview30,
-  [BlockType.TRAVEL_PROGRAMME_LINK]: Preview31,
-  [BlockType.TRAVEL_SECTION_HEADING]: Preview32,
-  [BlockType.TRAVEL_TOUR_CATALOGUE]: Preview33,
-  [BlockType.TRAVEL_TOUR_ENQUIRY]: Preview34,
-  [BlockType.TRAVEL_TOUR_OVERVIEW]: Preview35,
-  [BlockType.TRAVEL_TOUR_PACKAGE]: Preview36,
-  [BlockType.TRAVEL_TOUR_STORY]: Preview37,
-  [BlockType.TRAVEL_TRUST_STRIP]: Preview38,
-  [BlockType.TWO_COLUMN]: Preview39,
-  [BlockType.UI_ACCORDION]: Preview40,
-  [BlockType.UI_BUTTON_CTA]: Preview41,
-  [BlockType.UI_CARD_GRID]: Preview42,
-  [BlockType.UI_TABS]: Preview43,
-  [BlockType.VIDEO_EMBED]: Preview44,
+  [BlockType.SPACER]: Preview22,
+  [BlockType.STATS]: Preview23,
+  [BlockType.TABLE]: Preview24,
+  [BlockType.TESTIMONIALS]: Preview25,
+  [BlockType.TEXT]: Preview26,
+  [BlockType.TRAVEL_CONTACT_CTA]: Preview27,
+  [BlockType.TRAVEL_DEPARTURE_SCHEDULE]: Preview28,
+  [BlockType.TRAVEL_EDITORIAL_HERO]: Preview29,
+  [BlockType.TRAVEL_FEATURED_OFFER]: Preview30,
+  [BlockType.TRAVEL_JOURNEY_GRID]: Preview31,
+  [BlockType.TRAVEL_PROGRAMME_LINK]: Preview32,
+  [BlockType.TRAVEL_SECTION_HEADING]: Preview33,
+  [BlockType.TRAVEL_TOUR_CATALOGUE]: Preview34,
+  [BlockType.TRAVEL_TOUR_ENQUIRY]: Preview35,
+  [BlockType.TRAVEL_TOUR_OVERVIEW]: Preview36,
+  [BlockType.TRAVEL_TOUR_PACKAGE]: Preview37,
+  [BlockType.TRAVEL_TOUR_STORY]: Preview38,
+  [BlockType.TRAVEL_TRUST_STRIP]: Preview39,
+  [BlockType.TWO_COLUMN]: Preview40,
+  [BlockType.UI_ACCORDION]: Preview41,
+  [BlockType.UI_BUTTON_CTA]: Preview42,
+  [BlockType.UI_CARD_GRID]: Preview43,
+  [BlockType.UI_TABS]: Preview44,
+  [BlockType.VIDEO_EMBED]: Preview45,
 } as unknown as Record<BlockType, ComponentType<any>>;

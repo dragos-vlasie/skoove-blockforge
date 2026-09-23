@@ -11,6 +11,7 @@ import {
   type RemotePreviewRoute,
 } from "../preview/protocol";
 import { PublicSite } from "./PublicSite";
+import { spacerContentCapability } from "../content/spacer";
 import { PreviewOverlay } from "@blockforge/preview";
 
 const MemoizedPublicSite = memo(PublicSite);
@@ -69,6 +70,7 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
       type: previewMessageType.ready,
       protocolVersion: previewProtocolVersion,
       capabilities: [previewCapability.subjectUpdates, previewCapability.sectionInsertion, previewCapability.sectionActions],
+      contentCapabilities: [spacerContentCapability],
     }, parentOrigin);
     return () => {
       window.removeEventListener("message", receive);

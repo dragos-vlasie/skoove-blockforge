@@ -17,6 +17,7 @@ export const corePackManifest = {
     { type: BlockType.HERO, name: "Hero", classification: "component" },
     { type: BlockType.MEDIA, name: "Media", classification: "component" },
     { type: BlockType.TEXT, name: "Text", classification: "component" },
+    { type: BlockType.SPACER, name: "Spacer", classification: "component" },
     { type: BlockType.FEATURES, name: "Features", classification: "component" },
     { type: BlockType.LOGO_CLOUD, name: "Logo Cloud", classification: "component" },
     { type: BlockType.FEATURE_BENTO, name: "Feature Bento", classification: "preset", canonicalType: BlockType.UI_CARD_GRID, legacy: true },

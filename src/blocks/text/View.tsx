@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { cx, publicStyles as ui } from "../../styles/publicStyles";
+import { Spacer } from "../../content/SpacerElement";
+import { normalizeLinkHref } from "../../content/linkHref";
 
 type RichTextNode = {
   type?: string;
@@ -9,23 +11,7 @@ type RichTextNode = {
   content?: RichTextNode[];
 };
 
-const sanitizeHref = (value: unknown) => {
-  if (typeof value !== "string") return "#";
-
-  const href = value.trim();
-  if (href.startsWith("/") || href.startsWith("#")) return href;
-
-  try {
-    const url = new URL(href);
-    if (url.protocol === "http:" || url.protocol === "https:" || url.protocol === "mailto:") {
-      return url.href;
-    }
-  } catch {
-    return "#";
-  }
-
-  return "#";
-};
+const sanitizeHref = (value: unknown) => normalizeLinkHref(value) ?? "#";
 
 const renderMarkedText = (node: RichTextNode) => {
   let text: ReactNode = node.text ?? "";
@@ -109,6 +95,8 @@ const TiptapNodeRenderer = ({ node }: { node: RichTextNode }) => {
       return <hr className="my-10 border-0 border-t border-[var(--site-border)]" />;
     case "hardBreak":
       return <br />;
+    case "spacer":
+      return <Spacer height={node.attrs?.height} />;
     case "codeBlock":
       return <pre className="my-8 overflow-x-auto rounded-[var(--site-radius-sm)] bg-[var(--site-inverse)] p-5 text-sm text-[var(--site-on-inverse)]"><code>{node.text ?? renderChildren(node)}</code></pre>;
     default:

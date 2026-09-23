@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@blockforge/preview": "file:../../vendor/blockforge-preview-0.1.0.tgz",
+    "@blockforge/preview": "file:../../vendor/blockforge-preview-0.1.1.tgz",
     "@blockforge/blocks": "*",
     "@blockforge/core": "*",
     "@blockforge/packs": "*",
