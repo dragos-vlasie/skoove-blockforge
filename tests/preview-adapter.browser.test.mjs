@@ -40,6 +40,7 @@ test("Skoove adapter connects the installed v4 package to host messages", async 
     const ready = await page.evaluate(() => window.previewMessages.find((message) => message.type === "blockforge:preview:ready"));
     assert.equal(ready.protocolVersion, 4);
     assert.deepEqual(ready.capabilities, ["subject-updates", "section-insertion", "section-actions"]);
+    assert.deepEqual(ready.contentCapabilities, ["content-spacer-v1"]);
     const frame = page.frameLocator('iframe[title="Skoove preview"]');
     const route = { graph: {}, subject: { id: "article", caption: "Original caption", blocks: [{ id: "table", type: "TABLE" }] }, routeType: "entry", path: "/blog/article/" };
     const send = (message) => page.evaluate((data) => document.querySelector("iframe").contentWindow.postMessage(data, location.origin), message);
@@ -69,6 +70,10 @@ test("Skoove adapter connects the installed v4 package to host messages", async 
     const selected = await page.evaluate(() => window.previewMessages.find((message) => message.type === "blockforge:preview:select-block"));
     assert.equal(selected.blockId, "table", "nested DOM selection resolves to owning section");
     assert.equal(await iframe.evaluate(() => window.contentRenderCount), renders);
+    await frame.getByRole("button", { name: "Browse preview" }).click();
+    assert.equal(await frame.locator('[data-blockforge-editing="false"]').count(), 1);
+    await frame.getByRole("button", { name: "Return to editing" }).click();
+    assert.equal(await frame.locator('[data-blockforge-editing="true"]').count(), 1);
     assert.deepEqual(errors, []);
   } finally {
     await browser?.close();
