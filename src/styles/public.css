@@ -4,6 +4,7 @@
 @source "../../apps";
 @source "../../components";
 @source "../../packages";
+@source "../../node_modules/@blockforge/preview/src";
 @source "..";
 
 :root {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import {
   isPreviewMessage,
   previewCapability,
@@ -11,6 +11,9 @@ import {
   type RemotePreviewRoute,
 } from "../preview/protocol";
 import { PublicSite } from "./PublicSite";
+import { PreviewOverlay } from "@blockforge/preview";
+
+const MemoizedPublicSite = memo(PublicSite);
 
 const sendToParent = (message: PreviewToParentMessage, parentOrigin: string) => {
   window.parent.postMessage(message, parentOrigin);
@@ -19,20 +22,8 @@ const sendToParent = (message: PreviewToParentMessage, parentOrigin: string) => 
 export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
   const [route, setRoute] = useState<RemotePreviewRoute | null>(null);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
-  const [insertionPoint, setInsertionPoint] = useState<{
-    afterBlockId?: string;
-    atIndex?: number;
-    label: string;
-    left: number;
-    top: number;
-  } | null>(null);
-  const insertionKeyRef = useRef<string | null>(null);
-
-  const clearInsertionPoint = () => {
-    if (insertionKeyRef.current === null) return;
-    insertionKeyRef.current = null;
-    setInsertionPoint(null);
-  };
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [canAct, setCanAct] = useState(false);
 
   useEffect(() => {
     const receive = (event: MessageEvent<ParentToPreviewMessage>) => {
@@ -41,6 +32,7 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
 
       if (message.type === previewMessageType.render) {
         setRoute(message.route);
+        setCanAct(message.capabilities?.includes(previewCapability.sectionActions) ?? false);
         setActiveBlockId(message.activeBlockId ?? null);
       }
       if (message.type === previewMessageType.updateSubject) {
@@ -76,7 +68,7 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
     sendToParent({
       type: previewMessageType.ready,
       protocolVersion: previewProtocolVersion,
-      capabilities: [previewCapability.subjectUpdates, previewCapability.sectionInsertion],
+      capabilities: [previewCapability.subjectUpdates, previewCapability.sectionInsertion, previewCapability.sectionActions],
     }, parentOrigin);
     return () => {
       window.removeEventListener("message", receive);
@@ -84,54 +76,6 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
       window.cancelAnimationFrame(animationFrame);
     };
   }, [parentOrigin]);
-
-  const selectBlock = (event: MouseEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement | null;
-    if (target?.closest?.("[data-blockforge-insertion-control]")) return;
-    const block = target?.closest?.<HTMLElement>("[data-blockforge-block-id]");
-    if (target?.closest?.("a[href], button, summary")) event.preventDefault();
-    if (!block) return;
-    event.preventDefault();
-    sendToParent({
-      type: previewMessageType.selectBlock,
-      blockId: block.dataset.blockforgeBlockId || "",
-    }, parentOrigin);
-  };
-
-  const updateInsertionPoint = (event: PointerEvent<HTMLElement>) => {
-    if (event.pointerType !== "mouse") return;
-    const target = event.target as HTMLElement | null;
-    if (target?.closest?.("[data-blockforge-insertion-control]")) return;
-
-    const block = target?.closest?.<HTMLElement>("[data-blockforge-block-id]");
-    const blockId = block?.dataset.blockforgeBlockId;
-    if (!block || !blockId) {
-      clearInsertionPoint();
-      return;
-    }
-
-    const rect = block.getBoundingClientRect();
-    const firstBlock = document.querySelector<HTMLElement>("[data-blockforge-block-id]");
-    const insertAtStart = block === firstBlock && event.clientY - rect.top < 28;
-    const nextKey = `${insertAtStart ? "start" : "after"}:${blockId}`;
-    if (insertionKeyRef.current === nextKey) return;
-    insertionKeyRef.current = nextKey;
-    setInsertionPoint({
-      ...(insertAtStart ? { atIndex: 0 } : { afterBlockId: blockId }),
-      label: insertAtStart ? "Add section at the beginning" : "Add section after this section",
-      left: Math.max(20, Math.min(window.innerWidth - 20, rect.left + rect.width / 2)),
-      top: Math.max(16, Math.min(window.innerHeight - 18, insertAtStart ? rect.top : rect.bottom)),
-    });
-  };
-
-  const requestSectionInsert = () => {
-    if (!insertionPoint) return;
-    sendToParent({
-      type: previewMessageType.requestSectionInsert,
-      ...(insertionPoint.afterBlockId ? { afterBlockId: insertionPoint.afterBlockId } : { atIndex: insertionPoint.atIndex ?? 0 }),
-    }, parentOrigin);
-    clearInsertionPoint();
-  };
 
   if (!route) {
     return (
@@ -144,43 +88,23 @@ export function LivePreviewClient({ parentOrigin }: { parentOrigin: string }) {
     );
   }
 
+  const scope = { subjectId: route.subject.id, path: route.path };
   return (
-    <div
-      onClickCapture={selectBlock}
-      onPointerMoveCapture={updateInsertionPoint}
-      onPointerLeave={clearInsertionPoint}
-      data-blockforge-live-preview
-      className="cursor-pointer"
-    >
-      <style>{activeBlockId ? `
-        [data-blockforge-block-id="${CSS.escape(activeBlockId)}"] {
-          outline: 3px solid #6d5dfc !important;
-          outline-offset: -3px;
-          position: relative;
-          z-index: 1;
-        }
-      ` : ""}</style>
-      <PublicSite route={route} preview />
-      {insertionPoint && (
-        <div
-          data-blockforge-insertion-control
-          className="fixed z-[2147483647] -translate-x-1/2 -translate-y-1/2"
-          style={{ left: insertionPoint.left, top: insertionPoint.top }}
-          onPointerMove={(event) => event.stopPropagation()}
-        >
-          <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-px w-20 -translate-x-1/2 -translate-y-1/2 bg-violet-400/80" />
-          <button
-            type="button"
-            aria-label={insertionPoint.label}
-            title={insertionPoint.label}
-            onClick={requestSectionInsert}
-            className="relative inline-flex h-8 items-center gap-1.5 rounded-full border border-violet-400 bg-white px-2.5 text-[11px] font-bold text-violet-700 shadow-lg shadow-violet-950/15 transition hover:border-violet-600 hover:bg-violet-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-200"
-          >
-            <span aria-hidden="true" className="text-base leading-none">+</span>
-            <span>Add section</span>
-          </button>
-        </div>
-      )}
-    </div>
+    <>
+      <div ref={rootRef} data-blockforge-live-preview>
+        <MemoizedPublicSite route={route} preview />
+      </div>
+      <PreviewOverlay
+        key={JSON.stringify(scope)}
+        rootRef={rootRef}
+        sections={route.subject.blocks ?? []}
+        documentKey={JSON.stringify(scope)}
+        activeBlockId={activeBlockId}
+        canAct={canAct}
+        onSelect={(blockId) => sendToParent({ type: previewMessageType.selectBlock, blockId, ...scope }, parentOrigin)}
+        onAction={(blockId, action) => sendToParent({ type: previewMessageType.sectionAction, blockId, action, ...scope }, parentOrigin)}
+        onInsert={(options) => sendToParent({ type: previewMessageType.requestSectionInsert, ...options, ...scope }, parentOrigin)}
+      />
+    </>
   );
 }
