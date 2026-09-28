@@ -14,6 +14,7 @@ import {
 import { resolveLocalizationMessages } from "../localization/messages";
 import {
   getDefaultTranslationAlternate,
+  getLocalizedHomeDestination,
   getTranslationAlternates,
 } from "../localization/translations";
 import { createSemanticThemeStyle } from "../themes/semanticTokens";
@@ -100,7 +101,7 @@ function SiteChrome({ graph, children, subject, preview = false }: { graph: any;
 export function PublicSite({ route, preview = false }: { route: any; preview?: boolean }) {
   const locale = getContentLocale(route.subject, route.graph.site);
   const messages = resolveLocalizationMessages(locale, route.graph.site.localeMessages);
-  const crumbs = [{ name: messages.home, path: getLocalizedHomePath(route.graph.site, locale) }, { name: route.subject.title ?? route.subject.name, path: route.path }];
+  const crumbs = [{ name: messages.home, path: getLocalizedHomeDestination(route.graph, locale) ?? getLocalizedHomePath(route.graph.site, locale) }, { name: route.subject.title ?? route.subject.name, path: route.path }];
   const entries = route.routeType === "category" ? getCategoryEntries(route.subject, route.graph) : route.routeType === "collection" ? getCollectionEntries(route.subject, route.graph) : [];
   const collectionItems = entries.map((entry: any) => ({ title: entry.title, path: getEntryPath(entry, route.graph.collectionDefinitions.find((item: any) => item.id === entry.collectionId), route.graph) }));
   const jsonLd = buildJsonLd({ graph: route.graph, subject: route.subject, path: route.path, collection: route.collection, crumbs, collectionItems });
@@ -123,10 +124,10 @@ export const routeMetadata = (route: any) => {
   const categories = "categoryIds" in route.subject ? route.subject.categoryIds.map((id: string) => route.graph.categories.find((category: any) => category.id === id)).filter(Boolean) : [];
   const translationAlternates = getTranslationAlternates(route.graph, route.subject);
   const defaultAlternate = getDefaultTranslationAlternate(route.graph, translationAlternates);
-  const languages = Object.fromEntries([
+  const languages = translationAlternates.length > 1 ? Object.fromEntries([
     ...translationAlternates.map((alternate) => [alternate.hreflang, alternate.url]),
     ...(defaultAlternate ? [["x-default", defaultAlternate.url]] : []),
-  ]);
+  ]) : undefined;
   return {
     title,
     description: resolved.description,

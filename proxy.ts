@@ -5,7 +5,12 @@ import { CMS_SESSION_COOKIE, isLocalCmsRequest, verifySessionToken } from "./src
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const normalizedPath = path.replace(/\/+$/, "");
-  if (!path.startsWith("/api/cms/") || normalizedPath === "/api/cms/login" || normalizedPath === "/api/cms/logout") return NextResponse.next();
+  if (!path.startsWith("/api/cms/")) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-blockforge-pathname", path);
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+  if (normalizedPath === "/api/cms/login" || normalizedPath === "/api/cms/logout") return NextResponse.next();
   const incomingUrl = new URL(request.nextUrl);
   const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
   const host = forwardedHost || request.headers.get("host");
@@ -40,4 +45,4 @@ export async function proxy(request: NextRequest) {
   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 }
 
-export const config = { matcher: ["/api/cms/:path*"] };
+export const config = { matcher: ["/api/cms/:path*", "/((?!api/|_next/|favicon.ico|robots.txt|sitemap.xml).*)"] };

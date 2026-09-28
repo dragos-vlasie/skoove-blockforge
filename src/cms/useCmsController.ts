@@ -26,6 +26,8 @@ import {
 import { BlockType, type BlockTypeId, type AssetMeta, type BlockData, type Category, type CollectionDefinition, type CollectionEntry, type ContentGraph, type PageContent, type ValidationIssue } from "../../types";
 import type { CmsTab, CreateContentInput, Selection } from "./types";
 import { getContentLocale } from "../localization/registry";
+import { getLocalizedHomeDestination } from "../localization/translations";
+import { getPagePath } from "../lib/cms/routing";
 import { cmsApiUrl, type CmsWorkspaceScope } from "../lib/cms/workspaceTypes";
 
 export type BlockInsertOptions = {
@@ -840,6 +842,12 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           ? "/"
           : page.slug.split("/").filter(Boolean).at(-1) ?? page.slug;
         page.slug = page.slug === "/" ? "/" : makeUniqueSlug(page.slug, usedSlugs);
+        if (draft.site.localeRouting?.strategy === "explicit") {
+          const parentPath = translatedParent
+            ? getPagePath(translatedParent, draft)
+            : getLocalizedHomeDestination(draft, locale);
+          if (parentPath) page.path = page.slug === "/" ? parentPath : `${parentPath.replace(/\/+$/, "")}/${page.slug}/`;
+        }
         draft.pages.push(page);
       } else {
         const entry = translated as CollectionEntry;
@@ -872,6 +880,10 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           )
           .map((candidate) => candidate.slug);
         entry.slug = makeUniqueSlug(entry.slug, usedSlugs);
+        if (draft.site.localeRouting?.strategy === "explicit") {
+          const homePath = getLocalizedHomeDestination(draft, locale);
+          if (homePath) entry.path = `${homePath.replace(/\/+$/, "")}/${entry.slug}/`;
+        }
         draft.entries.push(entry);
       }
     });

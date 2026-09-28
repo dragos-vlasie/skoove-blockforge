@@ -100,3 +100,27 @@ export const getDefaultTranslationAlternate = (
   alternates.find(
     (alternate) => alternate.locale.toLowerCase() === graph.site.defaultLocale.toLowerCase(),
   ) ?? alternates[0];
+
+/** Exact imported home paths take precedence over generated locale prefixes. */
+export const getPublishedLocalizedHomePath = (graph: ContentGraph, locale: string) => {
+  const home = graph.pages.find((page) =>
+    page.status === "published" &&
+    page.slug === "/" &&
+    getContentLocale(page, graph.site).toLowerCase() === locale.toLowerCase(),
+  );
+  return home ? getPagePath(home, graph) : undefined;
+};
+
+export const getLocalizedHomeDestination = (graph: ContentGraph, locale: string) =>
+  getPublishedLocalizedHomePath(graph, locale);
+
+export const getLanguageDestinations = (graph: ContentGraph, subject: LocalizedSubject) => {
+  const alternates = new Map(
+    getTranslationAlternates(graph, subject).map((item) => [item.locale.toLowerCase(), item.path]),
+  );
+  return getConfiguredLocales(graph.site).flatMap((locale) => {
+    const translationPath = alternates.get(locale.code.toLowerCase());
+    const path = translationPath ?? getLocalizedHomeDestination(graph, locale.code);
+    return path ? [{ locale: locale.code, label: locale.label, path, isTranslation: Boolean(translationPath) }] : [];
+  });
+};

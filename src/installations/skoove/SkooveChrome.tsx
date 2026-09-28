@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { getCategoryPath, getEntryPath, getPublishedEntries } from "../../lib/cms/routing";
 import { getContentLocale, getLocaleDirection } from "../../localization/registry";
+import { getLanguageDestinations, getLocalizedHomeDestination } from "../../localization/translations";
 import { PublicImage } from "../../ui/PublicImage";
 
 export const getSkooveHomePath = (locale: string) => locale === "en" ? "/blog/" : `/blog/${locale.toLowerCase()}/`;
@@ -142,12 +143,12 @@ function TrialBanner({ locale }: { locale: string }) {
 export function SkooveChrome({ graph, subject, children }: { graph: any; subject: any; children: ReactNode }) {
   const locale = getContentLocale(subject, graph.site);
   const labels = copy[locale] ?? copy.en;
-  const homePath = getSkooveHomePath(locale);
+  const homePath = getLocalizedHomeDestination(graph, locale) ?? getSkooveHomePath(locale);
   const categories = graph.categories
     .filter((category: any) => category.publicIndex && getContentLocale(category, graph.site) === locale && !ignoredCategorySlugs.has(category.slug))
     .sort((a: any, b: any) => categoryRank(a) - categoryRank(b) || String(a.name).localeCompare(String(b.name)))
     .slice(0, 5);
-  const locales = (graph.site.locales ?? []).filter((item: any) => item.enabled !== false);
+  const locales = getLanguageDestinations(graph, subject);
   const isArticle = Boolean(subject.collectionId);
 
   return <div className="min-h-screen bg-white font-[var(--font-body)] text-[#103133]" data-site-theme="skoove-magazine" lang={locale} dir={getLocaleDirection(graph.site, locale)}>
@@ -167,10 +168,10 @@ export function SkooveChrome({ graph, subject, children }: { graph: any; subject
               <a className="px-2 py-3 font-bold text-[#2ec39f] no-underline" href={homePath}>{labels.magazine}</a>
               <a className="px-2 py-3 font-bold text-[#2ec39f] no-underline" href="https://help.skoove.com/">{labels.faq}</a>
             </div>
-            <div className="mt-5 border-t border-white/15 pt-5">
+            {locales.length > 1 && <div className="mt-5 border-t border-white/15 pt-5">
               <p className="m-0 text-base font-black">{labels.changeLanguage}</p>
-              <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">{locales.map((item: any) => <a className="py-1 text-sm text-[#2ec39f] no-underline" href={getSkooveHomePath(item.code)} key={item.code} hrefLang={item.hreflang || item.code}>{item.label}</a>)}</div>
-            </div>
+              <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">{locales.map((item: any) => <a className="py-1 text-sm text-[#2ec39f] no-underline" href={item.path} key={item.locale} hrefLang={item.locale} title={item.isTranslation ? item.label : `${item.label} homepage`}>{item.label}</a>)}</div>
+            </div>}
             <div className="mt-7 border-t border-white/15 pt-5"><p className="m-0 text-base font-black">{labels.follow}</p><div className="mt-4 flex flex-wrap gap-3 text-sm font-black text-[#2ec39f]"><a className="text-inherit no-underline" href="https://www.facebook.com/SkoovePiano">Facebook</a><a className="text-inherit no-underline" href="https://www.instagram.com/skoove_piano/">Instagram</a><a className="text-inherit no-underline" href="https://www.linkedin.com/company/skoove/">LinkedIn</a><a className="text-inherit no-underline" href="https://www.youtube.com/@SkoovePiano">YouTube</a></div></div>
           </nav>
         </details>
@@ -203,7 +204,7 @@ export function SkooveChrome({ graph, subject, children }: { graph: any; subject
         <div><BrandLogo graph={graph} /><p className="mt-5 max-w-xs text-lg font-bold leading-7">{labels.tagline}</p><p className="mt-8 text-sm text-white/65">© {new Date().getFullYear()} Learnfield GmbH</p></div>
         <div><h2 className="text-sm font-black uppercase tracking-[0.12em]">{labels.navigation}</h2><div className="mt-5 grid gap-3 text-sm"><a className="text-white/80 no-underline hover:text-white" href={homePath}>{labels.magazine}</a>{categories.slice(0, 4).map((category: any) => <a className="text-white/80 no-underline hover:text-white" href={getCategoryPath(category, graph)} key={category.id}>{categoryLabel(category)}</a>)}</div></div>
         <div><h2 className="text-sm font-black uppercase tracking-[0.12em]">{labels.company}</h2><div className="mt-5 grid gap-3 text-sm"><a className="text-white/80 no-underline hover:text-white" href="https://www.skoove.com/">Skoove</a><a className="text-white/80 no-underline hover:text-white" href="https://www.skoove.com/en/about">About</a><a className="text-white/80 no-underline hover:text-white" href="https://www.skoove.com/en/contact">Contact</a><a className="text-white/80 no-underline hover:text-white" href="https://help.skoove.com/">FAQ</a></div></div>
-        <div><h2 className="text-sm font-black uppercase tracking-[0.12em]">{labels.legal}</h2><div className="mt-5 grid gap-3 text-sm"><a className="text-white/80 no-underline hover:text-white" href="/blog/terms/">Terms &amp; Conditions</a><a className="text-white/80 no-underline hover:text-white" href="/blog/privacy/">Privacy</a><a className="text-white/80 no-underline hover:text-white" href="/blog/imprint/">Imprint</a></div>{locales.length > 1 && <details className="group mt-8 border-t border-white/20 pt-5"><summary className="cursor-pointer list-none text-sm font-black marker:hidden [&::-webkit-details-marker]:hidden">{labels.language}: {locales.find((item: any) => item.code === locale)?.label ?? locale} +</summary><div className="mt-4 grid grid-cols-2 gap-2">{locales.map((item: any) => <a className="text-sm text-white/75 no-underline hover:text-white" href={getSkooveHomePath(item.code)} key={item.code} hrefLang={item.hreflang || item.code}>{item.label}</a>)}</div></details>}</div>
+        <div><h2 className="text-sm font-black uppercase tracking-[0.12em]">{labels.legal}</h2><div className="mt-5 grid gap-3 text-sm"><a className="text-white/80 no-underline hover:text-white" href="/blog/terms/">Terms &amp; Conditions</a><a className="text-white/80 no-underline hover:text-white" href="/blog/privacy/">Privacy</a><a className="text-white/80 no-underline hover:text-white" href="/blog/imprint/">Imprint</a></div>{locales.length > 1 && <details className="group mt-8 border-t border-white/20 pt-5"><summary className="cursor-pointer list-none text-sm font-black marker:hidden [&::-webkit-details-marker]:hidden">{labels.language}: {locales.find((item: any) => item.locale === locale)?.label ?? locale} +</summary><div className="mt-4 grid grid-cols-2 gap-2">{locales.map((item: any) => <a className="text-sm text-white/75 no-underline hover:text-white" href={item.path} key={item.locale} hrefLang={item.locale} title={item.isTranslation ? item.label : `${item.label} homepage`}>{item.label}</a>)}</div></details>}</div>
       </div>
     </footer>
   </div>;

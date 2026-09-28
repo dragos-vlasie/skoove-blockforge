@@ -8,3 +8,4 @@ export * from "./profile";
 export * from "./site";
 export * from "./types";
 export * from "./writer";
+export * from "./wpml";

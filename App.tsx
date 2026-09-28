@@ -22,6 +22,7 @@ import { VisualPageEditor } from "./src/cms/VisualPageEditor";
 import { ContentBrowserModal } from "./src/cms/editor/ContentBrowserModal";
 import { CreateContentModal } from "./src/cms/editor/CreateContentModal";
 import { NavigationWorkspace } from "./src/cms/navigation/NavigationWorkspace";
+import { LocalizationSettingsPanel } from "./src/cms/localization/LocalizationSettingsPanel";
 import { PatternAssessmentPanel } from "./src/cms/patterns/PatternAssessmentPanel";
 import {
   getEnabledCollectionPresets,
@@ -118,7 +119,7 @@ export default function App({
 }) {
   const [websiteSetupOpen, setWebsiteSetupOpen] = useState(false);
   const [contentView, setContentView] = useState<string>("pages");
-  const [settingsView, setSettingsView] = useState<"general" | "brand" | "seo" | "components" | "models" | "patterns" | "urls" | "publishing">("general");
+  const [settingsView, setSettingsView] = useState<"general" | "languages" | "brand" | "seo" | "components" | "models" | "patterns" | "urls" | "publishing">("general");
   const [globalSearchOpen, setGlobalSearchOpen] = useState(false);
   const [focusedSharedBlockRequest, setFocusedSharedBlockRequest] = useState<{
     id: string;
@@ -699,6 +700,7 @@ export default function App({
                 <nav aria-label="Settings sections" className="flex gap-1 overflow-x-auto lg:block lg:space-y-1">
                   {([
                     ["general", "General"],
+                    ["languages", "Languages"],
                     ["brand", "Brand and design"],
                     ["seo", "SEO defaults"],
                     ["components", "Component packs"],
@@ -726,6 +728,7 @@ export default function App({
                   {settingsView === "general" && (
                     <GeneralSettingsPanel graph={graph} onPatch={patchGraph} onOpenSetup={openWebsiteSetup} />
                   )}
+                  {settingsView === "languages" && <LocalizationSettingsPanel graph={graph} onPatch={patchGraph} />}
                   {settingsView === "brand" && (
                     <SiteDesignPanel graph={graph} onPatch={(updater) => patchGraph((draft) => updater(draft))} />
                   )}
