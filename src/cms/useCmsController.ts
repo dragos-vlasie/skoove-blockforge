@@ -27,7 +27,7 @@ import { BlockType, type BlockTypeId, type AssetMeta, type BlockData, type Categ
 import type { CmsTab, CreateContentInput, Selection } from "./types";
 import { getContentLocale, getLocaleConfig } from "../localization/registry";
 import { getLocalizedHomeDestination } from "../localization/translations";
-import { getCollectionPath, getPagePath, withTrailingSlash } from "../lib/cms/routing";
+import { getCollectionPath, getEntryPath, getPagePath, withTrailingSlash } from "../lib/cms/routing";
 import { cmsApiUrl, type CmsWorkspaceScope } from "../lib/cms/workspaceTypes";
 
 export type BlockInsertOptions = {
@@ -866,7 +866,7 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           const parentPath = translatedParent
             ? getPagePath(translatedParent, draft)
             : getExplicitTranslationHomePath(draft, locale);
-          page.path = page.slug === "/" ? parentPath : withTrailingSlash(`${parentPath}/${page.slug}`);
+          page.path = page.slug === "/" ? parentPath : withTrailingSlash(`${parentPath.replace(/\/+$/, "")}/${page.slug}`);
         }
         draft.pages.push(page);
       } else {
@@ -895,17 +895,26 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
         const explicitCollectionPath = draft.site.localeRouting?.strategy === "explicit" && translatedDefinition?.path
           ? getCollectionPath(translatedDefinition, draft)
           : undefined;
-        const usedSlugs = draft.entries
-          .filter(
-            (candidate) =>
-              getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase() &&
-              (draft.site.localeRouting?.strategy === "explicit" && !explicitCollectionPath || candidate.collectionId === entry.collectionId),
-          )
-          .map((candidate) => candidate.slug);
+        const explicitBasePath = draft.site.localeRouting?.strategy === "explicit"
+          ? withTrailingSlash(explicitCollectionPath ?? getExplicitTranslationHomePath(draft, locale))
+          : undefined;
+        const usedSlugs = explicitBasePath
+          ? draft.entries.flatMap((candidate) => {
+              const definition = draft.collectionDefinitions.find((item) => item.id === candidate.collectionId);
+              const candidatePath = getEntryPath(candidate, definition, draft);
+              if (!candidatePath.startsWith(explicitBasePath)) return [];
+              const suffix = candidatePath.slice(explicitBasePath.length).replace(/\/$/, "");
+              return suffix && !suffix.includes("/") ? [suffix] : [];
+            })
+          : draft.entries
+              .filter((candidate) =>
+                candidate.collectionId === entry.collectionId &&
+                getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase(),
+              )
+              .map((candidate) => candidate.slug);
         entry.slug = makeUniqueSlug(entry.slug, usedSlugs);
-        if (draft.site.localeRouting?.strategy === "explicit") {
-          const basePath = explicitCollectionPath ?? getExplicitTranslationHomePath(draft, locale);
-          entry.path = withTrailingSlash(`${basePath}/${entry.slug}`);
+        if (explicitBasePath) {
+          entry.path = withTrailingSlash(`${explicitBasePath.replace(/\/+$/, "")}/${entry.slug}`);
         }
         draft.entries.push(entry);
       }
