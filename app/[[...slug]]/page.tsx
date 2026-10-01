@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getPublishedContent } from "../../src/lib/cms/contentStore";
 import { withTrailingSlash } from "../../src/lib/cms/routing";
 import { PublicSite, routeMetadata } from "../../src/next/PublicSite";
-import { resolvePublishedRoute } from "../../src/next/resolveRoute";
+import { resolvePublishedSiteRoute } from "../../src/next/resolveRoute";
 
 type Props = { params: Promise<{ slug?: string[] }> };
 const pathOf = (segments: string[] = []) => withTrailingSlash(segments.length ? `/${segments.join("/")}` : "/");
@@ -13,9 +13,7 @@ async function loadRoute(params: Props["params"]) {
   const path = pathOf((await params).slug);
   const rule = graph.redirects.find((candidate) => withTrailingSlash(candidate.from) === path);
   if (rule) rule.status === 301 ? permanentRedirect(rule.to) : redirect(rule.to);
-  const route = resolvePublishedRoute(graph, path);
-  if (route || graph.site.siteName !== "Skoove Blog") return route;
-  return resolvePublishedRoute(graph, withTrailingSlash(`/blog${path}`));
+  return resolvePublishedSiteRoute(graph, path);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

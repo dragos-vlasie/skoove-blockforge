@@ -30,3 +30,10 @@ export function resolvePublishedRoute(graph: any, inputPath: string) {
   }
   return null;
 }
+
+/** Match the public route even when an upstream /blog rewrite strips that prefix. */
+export function resolvePublishedSiteRoute(graph: any, inputPath: string) {
+  const route = resolvePublishedRoute(graph, inputPath);
+  if (route || graph.site.siteName !== "Skoove Blog") return route;
+  return resolvePublishedRoute(graph, withTrailingSlash(`/blog${inputPath}`));
+}

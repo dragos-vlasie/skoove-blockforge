@@ -25,15 +25,35 @@ import {
 } from "./storageState";
 import { BlockType, type BlockTypeId, type AssetMeta, type BlockData, type Category, type CollectionDefinition, type CollectionEntry, type ContentGraph, type PageContent, type ValidationIssue } from "../../types";
 import type { CmsTab, CreateContentInput, Selection } from "./types";
-import { getContentLocale } from "../localization/registry";
+import { getContentLocale, getLocaleConfig } from "../localization/registry";
 import { getLocalizedHomeDestination } from "../localization/translations";
-import { getPagePath } from "../lib/cms/routing";
+import { getCollectionPath, getPagePath, withTrailingSlash } from "../lib/cms/routing";
 import { cmsApiUrl, type CmsWorkspaceScope } from "../lib/cms/workspaceTypes";
 
 export type BlockInsertOptions = {
   afterBlockId?: string | null;
   atIndex?: number;
   initialContent?: Record<string, unknown>;
+};
+
+const getExplicitTranslationHomePath = (graph: ContentGraph, locale: string) => {
+  const publishedHome = getLocalizedHomeDestination(graph, locale);
+  if (publishedHome) return publishedHome;
+  const draftHome = graph.pages.find((page) =>
+    page.slug === "/" && getContentLocale(page, graph.site).toLowerCase() === locale.toLowerCase(),
+  );
+  if (draftHome?.path) return getPagePath(draftHome, graph);
+
+  const defaultHome = graph.pages.find((page) =>
+    page.slug === "/" && getContentLocale(page, graph.site).toLowerCase() === graph.site.defaultLocale.toLowerCase(),
+  );
+  let basePath = defaultHome?.path;
+  if (!basePath) {
+    try { basePath = new URL(graph.site.siteUrl).pathname; } catch { basePath = "/"; }
+  }
+  if (locale.toLowerCase() === graph.site.defaultLocale.toLowerCase()) return withTrailingSlash(basePath);
+  const segment = getLocaleConfig(graph.site, locale).pathPrefix?.replace(/^\/+|\/+$/g, "") || locale.toLowerCase();
+  return withTrailingSlash(`${basePath.replace(/\/+$/, "")}/${segment}`);
 };
 
 const resolveBlockInsertIndex = (blocks: BlockData[], options?: BlockInsertOptions) => {
@@ -845,8 +865,8 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
         if (draft.site.localeRouting?.strategy === "explicit") {
           const parentPath = translatedParent
             ? getPagePath(translatedParent, draft)
-            : getLocalizedHomeDestination(draft, locale);
-          if (parentPath) page.path = page.slug === "/" ? parentPath : `${parentPath.replace(/\/+$/, "")}/${page.slug}/`;
+            : getExplicitTranslationHomePath(draft, locale);
+          page.path = page.slug === "/" ? parentPath : withTrailingSlash(`${parentPath}/${page.slug}`);
         }
         draft.pages.push(page);
       } else {
@@ -872,17 +892,20 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           );
           return translatedCategory ? [translatedCategory.id] : [];
         });
+        const explicitCollectionPath = draft.site.localeRouting?.strategy === "explicit" && translatedDefinition?.path
+          ? getCollectionPath(translatedDefinition, draft)
+          : undefined;
         const usedSlugs = draft.entries
           .filter(
             (candidate) =>
-              candidate.collectionId === entry.collectionId &&
-              getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase(),
+              getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase() &&
+              (draft.site.localeRouting?.strategy === "explicit" && !explicitCollectionPath || candidate.collectionId === entry.collectionId),
           )
           .map((candidate) => candidate.slug);
         entry.slug = makeUniqueSlug(entry.slug, usedSlugs);
         if (draft.site.localeRouting?.strategy === "explicit") {
-          const homePath = getLocalizedHomeDestination(draft, locale);
-          if (homePath) entry.path = `${homePath.replace(/\/+$/, "")}/${entry.slug}/`;
+          const basePath = explicitCollectionPath ?? getExplicitTranslationHomePath(draft, locale);
+          entry.path = withTrailingSlash(`${basePath}/${entry.slug}`);
         }
         draft.entries.push(entry);
       }

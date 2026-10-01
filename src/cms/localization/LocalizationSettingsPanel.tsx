@@ -53,6 +53,7 @@ export function LocalizationSettingsPanel({
 
   const hasContent = (code: string) => [
     ...graph.pages, ...graph.entries, ...graph.collectionDefinitions, ...graph.categories,
+    ...graph.navigation, ...graph.sharedBlocks,
   ].some((record) => (record.locale ?? defaultCode).toLowerCase() === code.toLowerCase());
 
   return <section className="rounded-xl border border-[#e4e7ec] bg-white">
