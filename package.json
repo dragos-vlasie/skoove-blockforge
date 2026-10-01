@@ -27,6 +27,7 @@
     "wp:apply": "node --import tsx scripts/wordpress-import.ts apply",
     "test": "npm run test:unit && npm run test:smoke && npm run test:e2e",
     "test:unit": "node --test tests/rich-text-editor.test.mjs tests/block-registry.test.mjs tests/content-storage.test.mjs tests/media-library.test.mjs tests/content-model-builder.test.mjs tests/public-css-guard.test.mjs",
+    "test:localization": "node --import tsx --test tests/localization.test.mjs",
     "test:smoke": "node --test tests/website-smoke.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"

@@ -18,6 +18,7 @@ import {
   writeLocalizationManifest,
   detectWordPressLocalization,
   mergeWordPressAudits,
+  applyWpmlTranslationExport,
   type WordPressEntityKind,
   type NormalizedWordPressDocument,
   type WordPressSiteAudit,
@@ -294,10 +295,11 @@ program
   .argument("<bundle-directory>", "Directory containing inventory.json and documents/*.json")
   .option("--draft-only", "Write only the CMS draft snapshot")
   .option("--profile <file>", "Optional installation profile for client-specific branding and composition")
+  .option("--wpml-export <file>", "Reviewed JSON export of WPML translation relationships")
   .option("--content-root <directory>", "Content output root", "content")
   .action(async (
     bundleDirectory: string,
-    options: { draftOnly?: boolean; profile?: string; contentRoot: string },
+    options: { draftOnly?: boolean; profile?: string; wpmlExport?: string; contentRoot: string },
   ) => {
     const directory = resolve(bundleDirectory);
     const audit = JSON.parse(await readFile(resolve(directory, "inventory.json"), "utf8")) as WordPressSiteAudit;
@@ -314,6 +316,11 @@ program
       localization = undefined;
     }
     const graph = buildWordPressContentGraph({ audit, documents, localization }, profile);
+    if (options.wpmlExport) {
+      const rows = JSON.parse(await readFile(resolve(options.wpmlExport), "utf8"));
+      const result = applyWpmlTranslationExport(graph, rows);
+      console.log(`WPML translations: ${result.matched} records in ${result.groups} groups`);
+    }
     const contentRoot = resolve(options.contentRoot);
     await writeGraphSnapshot(resolve(contentRoot, "draft"), graph);
     if (!options.draftOnly) await writeGraphSnapshot(resolve(contentRoot, "published"), graph);

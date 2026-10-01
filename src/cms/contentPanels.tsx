@@ -97,6 +97,11 @@ export function TechnicalContentPanel({
           <TextInput value={item.slug} onChange={(event) => onPatch((draft) => { draft.slug = event.target.value; })} />
           <FieldIssues issues={issuesFor("missing a slug", "same slug", "duplicate public route")} />
         </Field>
+        {graph.site.localeRouting?.strategy === "explicit" && <Field label="Exact public path">
+          <TextInput value={item.path ?? ""} onChange={(event) => onPatch((draft) => { draft.path = event.target.value || undefined; })} placeholder="/blog/de/example/" />
+          <p className="mt-1 text-xs text-slate-500">Review this path before publishing a translation. Changing the slug does not change an exact path.</p>
+          <FieldIssues issues={issuesFor("duplicate public route")} />
+        </Field>}
         <Field label="Status">
           <select data-testid="content-status" className={selectChromeClass} value={item.status} onChange={(event) => onPatch((draft) => { draft.status = event.target.value as any; })}>
             <option value="draft">Draft</option>

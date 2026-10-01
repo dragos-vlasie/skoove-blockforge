@@ -25,13 +25,35 @@ import {
 } from "./storageState";
 import { BlockType, type BlockTypeId, type AssetMeta, type BlockData, type Category, type CollectionDefinition, type CollectionEntry, type ContentGraph, type PageContent, type ValidationIssue } from "../../types";
 import type { CmsTab, CreateContentInput, Selection } from "./types";
-import { getContentLocale } from "../localization/registry";
+import { getContentLocale, getLocaleConfig } from "../localization/registry";
+import { getLocalizedHomeDestination } from "../localization/translations";
+import { getCollectionPath, getEntryPath, getPagePath, withTrailingSlash } from "../lib/cms/routing";
 import { cmsApiUrl, type CmsWorkspaceScope } from "../lib/cms/workspaceTypes";
 
 export type BlockInsertOptions = {
   afterBlockId?: string | null;
   atIndex?: number;
   initialContent?: Record<string, unknown>;
+};
+
+const getExplicitTranslationHomePath = (graph: ContentGraph, locale: string) => {
+  const publishedHome = getLocalizedHomeDestination(graph, locale);
+  if (publishedHome) return publishedHome;
+  const draftHome = graph.pages.find((page) =>
+    page.slug === "/" && getContentLocale(page, graph.site).toLowerCase() === locale.toLowerCase(),
+  );
+  if (draftHome?.path) return getPagePath(draftHome, graph);
+
+  const defaultHome = graph.pages.find((page) =>
+    page.slug === "/" && getContentLocale(page, graph.site).toLowerCase() === graph.site.defaultLocale.toLowerCase(),
+  );
+  let basePath = defaultHome?.path;
+  if (!basePath) {
+    try { basePath = new URL(graph.site.siteUrl).pathname; } catch { basePath = "/"; }
+  }
+  if (locale.toLowerCase() === graph.site.defaultLocale.toLowerCase()) return withTrailingSlash(basePath);
+  const segment = getLocaleConfig(graph.site, locale).pathPrefix?.replace(/^\/+|\/+$/g, "") || locale.toLowerCase();
+  return withTrailingSlash(`${basePath.replace(/\/+$/, "")}/${segment}`);
 };
 
 const resolveBlockInsertIndex = (blocks: BlockData[], options?: BlockInsertOptions) => {
@@ -840,6 +862,12 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           ? "/"
           : page.slug.split("/").filter(Boolean).at(-1) ?? page.slug;
         page.slug = page.slug === "/" ? "/" : makeUniqueSlug(page.slug, usedSlugs);
+        if (draft.site.localeRouting?.strategy === "explicit") {
+          const parentPath = translatedParent
+            ? getPagePath(translatedParent, draft)
+            : getExplicitTranslationHomePath(draft, locale);
+          page.path = page.slug === "/" ? parentPath : withTrailingSlash(`${parentPath.replace(/\/+$/, "")}/${page.slug}`);
+        }
         draft.pages.push(page);
       } else {
         const entry = translated as CollectionEntry;
@@ -864,14 +892,30 @@ export function useCmsController(workspace: CmsWorkspaceScope) {
           );
           return translatedCategory ? [translatedCategory.id] : [];
         });
-        const usedSlugs = draft.entries
-          .filter(
-            (candidate) =>
-              candidate.collectionId === entry.collectionId &&
-              getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase(),
-          )
-          .map((candidate) => candidate.slug);
+        const explicitCollectionPath = draft.site.localeRouting?.strategy === "explicit" && translatedDefinition?.path
+          ? getCollectionPath(translatedDefinition, draft)
+          : undefined;
+        const explicitBasePath = draft.site.localeRouting?.strategy === "explicit"
+          ? withTrailingSlash(explicitCollectionPath ?? getExplicitTranslationHomePath(draft, locale))
+          : undefined;
+        const usedSlugs = explicitBasePath
+          ? draft.entries.flatMap((candidate) => {
+              const definition = draft.collectionDefinitions.find((item) => item.id === candidate.collectionId);
+              const candidatePath = getEntryPath(candidate, definition, draft);
+              if (!candidatePath.startsWith(explicitBasePath)) return [];
+              const suffix = candidatePath.slice(explicitBasePath.length).replace(/\/$/, "");
+              return suffix && !suffix.includes("/") ? [suffix] : [];
+            })
+          : draft.entries
+              .filter((candidate) =>
+                candidate.collectionId === entry.collectionId &&
+                getContentLocale(candidate, draft.site).toLowerCase() === locale.toLowerCase(),
+              )
+              .map((candidate) => candidate.slug);
         entry.slug = makeUniqueSlug(entry.slug, usedSlugs);
+        if (explicitBasePath) {
+          entry.path = withTrailingSlash(`${explicitBasePath.replace(/\/+$/, "")}/${entry.slug}`);
+        }
         draft.entries.push(entry);
       }
     });
