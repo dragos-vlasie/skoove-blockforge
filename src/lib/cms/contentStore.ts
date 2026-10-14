@@ -119,3 +119,9 @@ export const publishContent = async (
     warnings: published.warnings,
   };
 };
+
+export const getPublishedContentForPath = async (path: string, scope?: CmsWorkspaceScope, releaseId?: string) => {
+ const store=getContentStore(scope);
+ if(store.getPublishedForPath) return store.getPublishedForPath(path,releaseId);
+ return { releaseId: "", graph: await store.getPublished() };
+};
