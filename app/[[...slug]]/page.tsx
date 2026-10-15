@@ -1,6 +1,6 @@
 import { notFound, permanentRedirect, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getPublishedContent } from "../../src/lib/cms/contentStore";
+import { getPublishedContentForRender as getPublishedContent } from "../../src/next/publishedContent";
 import { withTrailingSlash } from "../../src/lib/cms/routing";
 import { PublicSite, routeMetadata } from "../../src/next/PublicSite";
 import { resolvePublishedRoute } from "../../src/next/resolveRoute";
@@ -9,13 +9,15 @@ type Props = { params: Promise<{ slug?: string[] }> };
 const pathOf = (segments: string[] = []) => withTrailingSlash(segments.length ? `/${segments.join("/")}` : "/");
 
 async function loadRoute(params: Props["params"]) {
-  const graph = await getPublishedContent();
   const path = pathOf((await params).slug);
+  const graph = await getPublishedContent(path);
   const rule = graph.redirects.find((candidate) => withTrailingSlash(candidate.from) === path);
   if (rule) rule.status === 301 ? permanentRedirect(rule.to) : redirect(rule.to);
   const route = resolvePublishedRoute(graph, path);
   if (route || graph.site.siteName !== "Skoove Blog") return route;
-  return resolvePublishedRoute(graph, withTrailingSlash(`/blog${path}`));
+  const alias = resolvePublishedRoute(graph, withTrailingSlash(`/blog${path}`));
+  if (!alias) return null;
+  return resolvePublishedRoute(await getPublishedContent(alias.path), alias.path);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
