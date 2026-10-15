@@ -183,3 +183,9 @@ export const buildJsonLd = ({
     ],
   };
 };
+
+export const isNonCanonicalVercelHost = (host: string | null, siteUrl: string) => {
+  if (!host) return false;
+  const hostname = host.toLowerCase().split(":")[0];
+  return hostname.endsWith(".vercel.app") && hostname !== new URL(siteUrl).hostname.toLowerCase();
+};

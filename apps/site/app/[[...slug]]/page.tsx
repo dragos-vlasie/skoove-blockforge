@@ -1,31 +1,28 @@
-import { notFound, permanentRedirect, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPublishedContent } from "../../../../src/lib/cms/contentStore";
-import { withTrailingSlash } from "../../../../src/lib/cms/routing";
+import { loadPublishedRoute, type PublishedPageProps } from "../../../../src/next/publishedRoute";
 import { PublicSite, routeMetadata } from "../../../../src/next/PublicSite";
-import { resolvePublishedRoute } from "../../../../src/next/resolveRoute";
+import { getPublishedContentForRender } from "../../../../src/next/publishedContent";
+import { publishedPaths } from "../../../../src/next/publishedPaths";
 
-type Props = { params: Promise<{ slug?: string[] }> };
-export const dynamic = "force-dynamic";
-const pathOf = (segments: string[] = []) => withTrailingSlash(segments.length ? `/${segments.join("/")}` : "/");
+export const revalidate = 60;
+export const dynamicParams = true;
 
-async function loadRoute(params: Props["params"]) {
-  const graph = await getPublishedContent();
-  const path = pathOf((await params).slug);
-  const rule = graph.redirects.find((candidate) => withTrailingSlash(candidate.from) === path);
-  if (rule) rule.status === 301 ? permanentRedirect(rule.to) : redirect(rule.to);
-  const route = resolvePublishedRoute(graph, path);
-  if (route || graph.site.siteName !== "Skoove Blog") return route;
-  return resolvePublishedRoute(graph, withTrailingSlash(`/blog${path}`));
+export async function generateStaticParams() {
+  // The home context contains the route index without fetching every article body.
+  // A failed read aborts the build instead of deploying an empty website.
+  const graph = await getPublishedContentForRender("/");
+  return publishedPaths(graph).map((path) => ({ slug: path.split("/").filter(Boolean) }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const route = await loadRoute(params);
-  return route ? routeMetadata(route) as Metadata : { title: "404 | BlockForge CMS", robots: { index: false, follow: false } };
+export async function generateMetadata({ params }: PublishedPageProps): Promise<Metadata> {
+  const route = await loadPublishedRoute(params);
+  return route ? routeMetadata(route) as Metadata
+    : { title: "404 | BlockForge CMS", robots: { index: false, follow: false } };
 }
 
-export default async function PublishedPage({ params }: Props) {
-  const route = await loadRoute(params);
+export default async function PublishedPage({ params }: PublishedPageProps) {
+  const route = await loadPublishedRoute(params);
   if (!route) notFound();
   return <PublicSite route={route} />;
 }

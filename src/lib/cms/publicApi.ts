@@ -25,7 +25,7 @@ const collectStringValues = (value: unknown, values = new Set<string>()) => {
   return values;
 };
 
-const publicAsset = (asset: AssetMeta): AssetMeta => {
+export const publicAsset = (asset: AssetMeta): AssetMeta => {
   const { storagePath: _storagePath, bucket: _bucket, ...safeAsset } = asset;
   return safeAsset;
 };

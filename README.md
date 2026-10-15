@@ -688,3 +688,11 @@ The public Next.js website includes a lightweight first-party analytics tracker:
 - Without a database, local development stores counters and recent events in `content/analytics/views.json`.
 
 The summary response contains traffic totals, sessions, visitors, bounce rate, time-series points, top paths, top clicks, and top referrers.
+
+## Published website availability
+
+Client pages use ISR with a 60-second page interval. Production builds prerender published routes, translated routes, pagination, redirects and the existing `/blog` aliases. Validated content is cached per CMS origin, tenant, site and path; failed regeneration keeps the previous page. Builds fail on unavailable content rather than publishing an empty site.
+
+Configure `BLOCKFORGE_SITE_URL` with the canonical website URL and `BLOCKFORGE_CONTENT_REVALIDATE_SECONDS=60`. Host-specific noindex rules run in middleware. Existing Skoove chrome and custom components are retained, including their scoped content-delivery contract.
+
+New uncached routes can fail during a CMS outage. Forms, external images, provider/DNS outages and database backup recovery are separate concerns.
