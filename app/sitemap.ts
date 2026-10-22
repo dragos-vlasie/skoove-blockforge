@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getOptionalPublishedContentForRender as getOptionalPublishedContent } from "../src/next/publishedContent";
+import { getOptionalPublishedRouteIndexForRender as getOptionalPublishedContent } from "../src/next/publishedContent";
 import { getCategoryPath, getCollectionPath, getEntryPath, getPagePath, getPublicCategories, getPublicCollections, getPublishedEntries, getPublishedPages } from "../src/lib/cms/routing";
 import { isIndexableSeo } from "../src/lib/cms/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = false;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const graph = await getOptionalPublishedContent();
