@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getOptionalPublishedContentForRender } from "../../../src/next/publishedContent";
 
-export const revalidate = 60;
+export const revalidate = false;
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
   const graph = await getOptionalPublishedContentForRender("/");

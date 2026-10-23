@@ -16,8 +16,9 @@ export async function loadPublishedRoute(params: PublishedPageProps["params"]) {
   const publicGraph = { ...graph, assets: graph.assets.map(publicAsset) };
   const route = resolvePublishedRoute(publicGraph, path);
   if (route || graph.site.siteName !== "Skoove Blog") return route;
-  const alias = resolvePublishedRoute(publicGraph, withTrailingSlash(`/blog${path}`));
-  if (!alias) return null;
-  const aliasGraph = await getOptionalPublishedContentForRender(alias.path);
-  return aliasGraph ? resolvePublishedRoute(aliasGraph, alias.path) : null;
+  // Resolve legacy aliases by their actual route. A scoped response need not
+  // contain metadata for unrelated pages, including localized blog homes.
+  const aliasPath = withTrailingSlash(`/blog${path}`);
+  const aliasGraph = await getOptionalPublishedContentForRender(aliasPath);
+  return aliasGraph ? resolvePublishedRoute(aliasGraph, aliasPath) : null;
 }

@@ -21,6 +21,9 @@ export interface ContentStore {
   getDraft(): Promise<ContentGraph>;
   saveDraft(graph: ContentGraph): Promise<ContentGraph>;
   getPublished(): Promise<ContentGraph>;
+  getPublishedRelease?(): Promise<string>;
+  getPublishedReleaseForRender?(): Promise<string>;
+  getPublishedRouteIndex?(releaseId?: string): Promise<{releaseId: string; graph: ContentGraph}>;
   getPublishedForPath?(path: string, releaseId?: string): Promise<{ releaseId: string; graph: ContentGraph }>;
   publish(
     graph: ContentGraph,
