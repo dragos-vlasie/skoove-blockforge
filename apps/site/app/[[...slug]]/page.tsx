@@ -2,17 +2,15 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { loadPublishedRoute, type PublishedPageProps } from "../../../../src/next/publishedRoute";
 import { PublicSite, routeMetadata } from "../../../../src/next/PublicSite";
-import { getPublishedRouteIndexForRender } from "../../../../src/next/publishedContent";
-import { publishedPaths } from "../../../../src/next/publishedPaths";
 
 export const revalidate = false;
 export const dynamicParams = true;
 
-export async function generateStaticParams() {
-  // The home context contains the route index without fetching every article body.
-  // A failed read aborts the build instead of deploying an empty website.
-  const graph = await getPublishedRouteIndexForRender();
-  return publishedPaths(graph).map((path) => ({ slug: path.split("/").filter(Boolean) }));
+export function generateStaticParams() {
+  // Verify and warm the homepage at build time. Other routes render on first
+  // visit and remain cached until publishing; deployment never crawls the site.
+  // Sitemap generation still reads the complete, compact routing index.
+  return [{ slug: [] as string[] }];
 }
 
 export async function generateMetadata({ params }: PublishedPageProps): Promise<Metadata> {
